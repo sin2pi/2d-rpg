@@ -1,0 +1,7 @@
+50 150 50 50 1 1 30 /Users/martindionisi/Desktop/openworld/openworld/enemy1.bmp
+150 150 50 50 1 1 30 /Users/martindionisi/Desktop/openworld/openworld/enemy1.bmp
+300 150 50 50 1 1 30 /Users/martindionisi/Desktop/openworld/openworld/enemy1.bmp
+300 50 50 50 1 1 30 /Users/martindionisi/Desktop/openworld/openworld/enemy1.bmp
+400 350 50 50 1 1 30 /Users/martindionisi/Desktop/openworld/openworld/enemy1.bmp
+100 500 50 50 1 1 30 /Users/martindionisi/Desktop/openworld/openworld/enemy1.bmp
+400 50 50 50 1 1 30 /Users/martindionisi/Desktop/openworld/openworld/enemy1.bmp
