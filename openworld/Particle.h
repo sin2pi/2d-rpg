@@ -74,7 +74,7 @@ public:
     void Render()
     {
         if(!isDead())
-            SDL_FillRect(SDL_GetVideoSurface(),&pos,SDL_MapRGB(SDL_GetVideoSurface()->format,150,0,0));
+            SDL_FillRect(SDL_GetVideoSurface(),&pos,SDL_MapRGB(SDL_GetVideoSurface()->format,0,0,200));
     }
     
 };

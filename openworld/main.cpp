@@ -88,7 +88,7 @@ int main(int argc,char* argv[])
             items.at(j)->Render();
         }
         player.Render(camera);
-        par.SetPos(npc.at(0)->getBox()->x-camera.x,npc.at(0)->getBox()->y-camera.y);
+        par.SetPos(player.getBox()->x-camera.x,player.getBox()->y-camera.y);
         par.Run();
         par.Render();
         map1.RenderLayer(tiles,1);
