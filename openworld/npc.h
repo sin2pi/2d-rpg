@@ -18,9 +18,12 @@ class cNpc
     SDL_Rect box;
     int side[4];
     float Power,Hp;
+    bool friends;
+    int rep;
+    int rad = 250;
  
     public:
-    cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,const char*file);
+    cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,int rp,const char*file);
     SDL_Rect *getBox(){ return &box;}
     float getXvel() { return xVel;};
     float getYvel() { return yVel;};

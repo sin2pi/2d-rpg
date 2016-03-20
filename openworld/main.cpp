@@ -74,7 +74,7 @@ int main(int argc,char* argv[])
         {
             npc.at(i)->Interact(player);
             npc.at(i)->Interact(npc);
-            npc.at(i)->Move(300,150);
+            //npc.at(i)->Move(300,150);
         }
         player.Move();
         camera = player.SetCamera(camera);
@@ -88,8 +88,8 @@ int main(int argc,char* argv[])
             items.at(j)->Render();
         }
         player.Render(camera);
-        par.SetPos(npc.at(0)->getBox()->x-camera.x,npc.at(0)->getBox()->y-camera.y);
-        par.Run();
+        par.SetPos(player.getBox()->x-camera.x,player.getBox()->y-camera.y);
+        //par.Run();
         par.Render();
         map1.RenderLayer(tiles,1);
         inv.Render();

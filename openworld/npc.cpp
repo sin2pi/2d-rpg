@@ -5,7 +5,7 @@ extern SDL_Rect camera;
 extern bool collision(SDL_Rect* rect1,SDL_Rect* rect2);
 using namespace std;
 
-cNpc::cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,const char*file)
+cNpc::cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,int rp,const char*file)
 {
     box.x = x;
     box.y = y;
@@ -15,6 +15,7 @@ cNpc::cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,co
     yVel = yvel;
     Hp = hp;
     Power = power;
+    rep = rp;
     image = SDL_LoadBMP(file);
 }
 
@@ -30,19 +31,19 @@ void cNpc::Interact(vector<cNpc*>n)
         {
             if(side[1])
             {
-                xVel = 0;
+                box.x -= xVel;
             }
             else if(side[3])
             {
-                xVel = 0;
+                box.x += xVel;
             }
             if(side[0])
             {
-                yVel = 0;
+                box.y -= yVel;
             }
             else if(side[2])
             {
-                yVel = 0;
+                box.y += yVel;
             }
             
         }
@@ -52,24 +53,43 @@ void cNpc::Interact(vector<cNpc*>n)
 
 void cNpc::Interact(cPlayer p)
 {
-    if(Physics::collision(&box,p.getBox()))
+    if(Physics::circlecol(p.getBox(),box.x,box.y,rad))
     {
-        if(side[1])
+        if(rep > 70)
         {
-            xVel = 0;
+            friends = true;
+            if(Physics::collision(&box,p.getBox()))
+            {
+                if(side[1])
+                {
+                    xVel = 0;
+                }
+                else if(side[3])
+                {
+                    xVel = 0;
+                }
+                if(side[0])
+                {
+                    yVel = 0;
+                }
+                else if(side[2])
+                {
+                    yVel = 0;
+                }
+            }
+
         }
-        else if(side[3])
+        if(rep < 30)
         {
-            xVel = 0;
+            friends = false;
+            Move(p.getBox()->x,p.getBox()->y);
         }
-        if(side[0])
+        if(rep > 30 && rep < 30)
         {
-            yVel = 0;
+            friends = false;
+            
         }
-        else if(side[2])
-        {
-            yVel = 0;
-        }
+
     }
 }
 
