@@ -17,14 +17,15 @@ void LoadNpcList(vector<cNpc*>*list,const char *file)
 {
     ifstream openfile(file);
     float x,y,w,h,xv,yv,hp;
+    int rep;
     string f;
     const char *c;
     
     while(!openfile.eof())
     {
-        openfile >> x >> y >> w >> h >> xv >> yv >> hp >> f;
+        openfile >> x >> y >> w >> h >> xv >> yv >> hp >> rep >> f;
         c = f.c_str();
-        list->push_back(new cNpc(x,y,w,h,xv,yv,hp,10,c));
+        list->push_back(new cNpc(x,y,w,h,xv,yv,hp,rep,10,c));
     }
 }
 
