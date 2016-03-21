@@ -72,10 +72,12 @@ int main(int argc,char* argv[])
         
         for(int i = 0;i<npc.size();i++)
         {
+            npc.at(i)->runPath();
             npc.at(i)->Interact(player);
             npc.at(i)->Interact(npc);
-            npc.at(i)->Move(300,150);
+            
         }
+        cout << npc.size() << endl;
         player.Move();
         camera = player.SetCamera(camera);
         map1.RenderLayer(tiles,0);
@@ -88,8 +90,8 @@ int main(int argc,char* argv[])
             items.at(j)->Render();
         }
         player.Render(camera);
-        par.SetPos(npc.at(0)->getBox()->x-camera.x,npc.at(0)->getBox()->y-camera.y);
-        par.Run();
+        par.SetPos(player.getBox()->x-camera.x,player.getBox()->y-camera.y);
+        //par.Run();
         par.Render();
         map1.RenderLayer(tiles,1);
         inv.Render();

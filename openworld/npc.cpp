@@ -5,7 +5,7 @@ extern SDL_Rect camera;
 extern bool collision(SDL_Rect* rect1,SDL_Rect* rect2);
 using namespace std;
 
-cNpc::cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,const char*file)
+cNpc::cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,int rp,const char*file)
 {
     box.x = x;
     box.y = y;
@@ -13,8 +13,12 @@ cNpc::cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,co
     box.h = h;
     xVel = xvel;
     yVel = yvel;
+    xSpeed = xVel;
+    ySpeed = yVel;
     Hp = hp;
     Power = power;
+    rep = rp;
+    setSquarePath(150, 100);
     image = SDL_LoadBMP(file);
 }
 
@@ -30,46 +34,104 @@ void cNpc::Interact(vector<cNpc*>n)
         {
             if(side[1])
             {
-                xVel = 0;
+                box.x -= xVel;
             }
             else if(side[3])
             {
-                xVel = 0;
+                box.x += xVel;
             }
             if(side[0])
             {
-                yVel = 0;
+                box.y -= yVel;
             }
             else if(side[2])
             {
-                yVel = 0;
+                box.y += yVel;
             }
             
         }
     }
     
+    
+}
+
+void cNpc::setSquarePath(int width, int height)
+{
+    vrt[0] = {static_cast<float>(box.x),static_cast<float>(box.y)};
+    vrt[1] = {static_cast<float>(box.x + width),static_cast<float>(box.y)};
+    vrt[2] = {static_cast<float>(box.x + width),static_cast<float>(box.y+height)};
+    vrt[3] = {static_cast<float>(box.x),static_cast<float>(box.y+height)};
+}
+
+void cNpc::runPath()
+{
+    ontrack = false;
+    if(box.y == vrt[1].y && box.x <= vrt[1].x){
+        Move(vrt[1].x,vrt[1].y);
+        ontrack = true;
+    }
+    if(box.x == vrt[2].x && box.y <= vrt[2].y){
+        Move(vrt[2].x,vrt[2].y);
+        ontrack = true;
+    }
+    if(box.y == vrt[3].y && box.x >= vrt[3].x){
+        Move(vrt[3].x,vrt[3].y);
+        ontrack = true;
+    }
+    if(box.x == vrt[0].x && box.y >= vrt[0].y){
+        Move(vrt[0].x,vrt[0].y);
+        ontrack = true;
+    }
+    if(!ontrack && !onradar)
+        Move(vrt[0].x,vrt[0].y);
 }
 
 void cNpc::Interact(cPlayer p)
 {
-    if(Physics::collision(&box,p.getBox()))
+    if(Physics::circlecol(p.getBox(),box.x,box.y,rad))
     {
-        if(side[1])
+        onradar = true;
+        if(rep > 70)
         {
-            xVel = 0;
+            //friends = true;
+            if(Physics::collision(&box,p.getBox()))
+            {
+                if(side[1])
+                {
+                    xVel = 0;
+                }
+                else if(side[3])
+                {
+                    xVel = 0;
+                }
+                if(side[0])
+                {
+                    yVel = 0;
+                }
+                else if(side[2])
+                {
+                    yVel = 0;
+                }
+            }
+
         }
-        else if(side[3])
+        if(rep < 30)
         {
-            xVel = 0;
+            friends = false;
+            Move(p.getBox()->x,p.getBox()->y);
         }
-        if(side[0])
+        if(rep > 30 && rep < 30)
         {
-            yVel = 0;
+            friends = false;
+            
         }
-        else if(side[2])
-        {
-            yVel = 0;
-        }
+
+    }
+    else{
+        
+        xVel = xSpeed;
+        yVel = ySpeed;
+        onradar = false;
     }
 }
 
@@ -94,12 +156,14 @@ void cNpc::Move(int x, int y)
              box.y += yVel;
              side[0] = 1;
              side[2] = 0;
+              
              }
+         if(box.y == y)
+         {
+             e = 2;
+         }
      }
-     if(box.y == y)
-     {
-       e = 2;
-     }
+     
 
       if(b == 1)
      {
@@ -113,11 +177,12 @@ void cNpc::Move(int x, int y)
              side[1] = 1;
              side[3] = 0;
              }
+         if(box.x == x)
+         {
+             b = 2;
+         }
      }
-     if(box.x == x)
-     {
-       b = 2;
-     }
+     
      }
 }
 

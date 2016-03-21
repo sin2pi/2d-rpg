@@ -4,6 +4,7 @@
 #include <vector>
 #include "Player.h"
 #include <fstream>
+#include "Particle.h"
 
 using namespace std;
 
@@ -18,12 +19,21 @@ class cNpc
     SDL_Rect box;
     int side[4];
     float Power,Hp;
+    bool friends;
+    int rep;
+    int rad = 150;
+    bool ontrack;
+    bool onradar;
+    vec2d vrt[4];
+    
  
     public:
-    cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,const char*file);
+    cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,int rp,const char*file);
     SDL_Rect *getBox(){ return &box;}
     float getXvel() { return xVel;};
     float getYvel() { return yVel;};
+    void setSquarePath(int width, int height);
+    void runPath();
     void Interact(cPlayer p);
     void Interact(vector<cNpc*>n);
     void Move(int x,int y);

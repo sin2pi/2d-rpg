@@ -78,6 +78,7 @@ void Inventory::Render()
         SDL_Rect box = {static_cast<Sint16>(100+(i*60)),static_cast<Sint16>(400)};
         SDL_BlitSurface(inventory.at(i)->getImage(),NULL,SDL_GetVideoSurface(),&box);
         SDL_BlitSurface(asur,NULL,SDL_GetVideoSurface(),&rq);
+        SDL_FreeSurface(asur);
         
     }
     
