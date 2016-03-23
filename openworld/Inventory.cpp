@@ -73,7 +73,7 @@ void Inventory::Render()
     if(queue >= inventory.size())
         queue = inventory.size()-1;
     rq = {static_cast<Sint16>((100+(queue*60))),400,40,40};
-    for(int i =0; i< inventory.size();i++)
+    for(int i =0; i <= inventory.size();i++)
     {
         SDL_Rect box = {static_cast<Sint16>(100+(i*60)),static_cast<Sint16>(400)};
         SDL_BlitSurface(inventory.at(i)->getImage(),NULL,SDL_GetVideoSurface(),&box);

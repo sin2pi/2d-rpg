@@ -18,7 +18,7 @@ using namespace std;
 int main(int argc,char* argv[])
 {
     SDL_Init(SDL_INIT_EVERYTHING);
-    screen = SDL_SetVideoMode(640,480,32,SDL_INIT_JOYSTICK|SDL_OPENGLBLIT);
+    screen = SDL_SetVideoMode(640,480,32,SDL_INIT_JOYSTICK|SDL_FULLSCREEN);
     
     SDL_Joystick *joystick;
     SDL_JoystickEventState(SDL_ENABLE);
@@ -37,7 +37,7 @@ int main(int argc,char* argv[])
     
     ParticleEngine par(4000,l1,l2,pos);
     
-    cPlayer player(200,100,20,40,2,2,2,"/Users/martindionisi/Desktop/openworld/openworld/Luigi.bmp",3);
+    cPlayer player(0,100,20,40,2,2,2,"/Users/martindionisi/Desktop/openworld/openworld/mario.bmp",3);
     
     vector<cNpc*>npc;
     LoadNpcList(&npc,"/Users/martindionisi/Desktop/openworld/openworld/npcl.txt");
@@ -77,7 +77,6 @@ int main(int argc,char* argv[])
             npc.at(i)->Interact(npc);
             
         }
-        cout << npc.size() << endl;
         player.Move();
         camera = player.SetCamera(camera);
         map1.RenderLayer(tiles,0);
@@ -91,10 +90,10 @@ int main(int argc,char* argv[])
         }
         player.Render(camera);
         par.SetPos(player.getBox()->x-camera.x,player.getBox()->y-camera.y);
-        //par.Run();
+        par.Run();
         par.Render();
         map1.RenderLayer(tiles,1);
-        inv.Render();
+        //inv.Render();
     
         
         SDL_GL_SwapBuffers();

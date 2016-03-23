@@ -5,7 +5,7 @@ extern SDL_Rect camera;
 extern bool collision(SDL_Rect* rect1,SDL_Rect* rect2);
 using namespace std;
 
-cNpc::cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,int rp,const char*file)
+cNpc::cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,int rp,const char*file,int nx)
 {
     box.x = x;
     box.y = y;
@@ -15,11 +15,14 @@ cNpc::cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,in
     yVel = yvel;
     xSpeed = xVel;
     ySpeed = yVel;
+    ranim = new Animation(0,0,w,h,nx,10);
+    lanim = new Animation(0,h,w,h,nx,10);
     Hp = hp;
     Power = power;
     rep = rp;
     setSquarePath(150, 100);
     image = SDL_LoadBMP(file);
+    SDL_SetColorKey(image,SDL_SRCCOLORKEY,SDL_MapRGB(image->format,0,255,255));
 }
 
 void cNpc::Interact(vector<cNpc*>n)
@@ -93,7 +96,7 @@ void cNpc::Interact(cPlayer p)
         onradar = true;
         if(rep > 70)
         {
-            //friends = true;
+            friends = true;
             if(Physics::collision(&box,p.getBox()))
             {
                 if(side[1])
@@ -189,6 +192,22 @@ void cNpc::Move(int x, int y)
 void cNpc::Render()
 {
     SDL_Rect rect = {static_cast<Sint16>(box.x - camera.x), static_cast<Sint16>(box.y - camera.y)};
-    if(Hp > 0)
-    SDL_BlitSurface(image,NULL,screen,&rect);
+    if(Hp > 0){
+        if(side[3])
+        {
+            lanim->RunAnimation(rect,image);
+        }
+        else if(side[1])
+        {
+            ranim->RunAnimation(rect,image);
+        }
+        else if(side[2])
+        {
+            lanim->RunAnimation(rect,image);
+        }
+        else if(side[0])
+        {
+            ranim->RunAnimation(rect,image);
+        }
+    }
 }

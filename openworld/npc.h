@@ -5,6 +5,7 @@
 #include "Player.h"
 #include <fstream>
 #include "Particle.h"
+#include "Animation.h"
 
 using namespace std;
 
@@ -24,11 +25,14 @@ class cNpc
     int rad = 150;
     bool ontrack;
     bool onradar;
+    int nx;
+    Animation *ranim;
+    Animation *lanim;
     vec2d vrt[4];
     
  
     public:
-    cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,int rp,const char*file);
+    cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,int rp,const char*file,int nx);
     SDL_Rect *getBox(){ return &box;}
     float getXvel() { return xVel;};
     float getYvel() { return yVel;};
