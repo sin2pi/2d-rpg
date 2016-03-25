@@ -94,7 +94,7 @@ void cNpc::Interact(cPlayer p)
     if(Physics::circlecol(p.getBox(),box.x,box.y,rad))
     {
         onradar = true;
-        if(rep > 70)
+        if(rep >= 70)
         {
             friends = true;
             if(Physics::collision(&box,p.getBox()))
@@ -122,8 +122,28 @@ void cNpc::Interact(cPlayer p)
         {
             friends = false;
             Move(p.getBox()->x,p.getBox()->y);
+            //attack & stuff
+            if(Physics::collision(&box,p.getBox()))
+            {
+                if(side[1])
+                {
+                    box.x -= xVel;
+                }
+                else if(side[3])
+                {
+                    box.x += xVel;
+                }
+                if(side[0])
+                {
+                    box.y -= yVel;
+                }
+                else if(side[2])
+                {
+                    box.y += yVel;
+                }
+            }
         }
-        if(rep > 30 && rep < 30)
+        if(rep >= 30 && rep < 70)
         {
             friends = false;
             

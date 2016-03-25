@@ -31,7 +31,7 @@ public:
         pos.y = y;
     }
     
-    int Rand(int nMin, int nMax)
+    float Rand(int nMin, int nMax)
     {
         return nMin + (int)((double)rand() / (RAND_MAX+1) * (nMax-nMin+1));
     }
@@ -68,8 +68,10 @@ public:
             if(particles.at(i)->isDead())
             {
                 
-                dir.x =rand()%10+(float)rand()/(float)RAND_MAX-5;
-                dir.y =rand()%10+(float)rand()/(float)RAND_MAX-5;
+                dir.x =rand()%10-5;
+                dir.y =rand()%10-5;
+                //dir.x = Rand(lim1.x, lim2.x);
+                //dir.y = Rand(lim1.y, lim2.y);
                 speed = Rand(1,4);
                 int time = Rand(1000,3000);
                 delete particles.at(i);

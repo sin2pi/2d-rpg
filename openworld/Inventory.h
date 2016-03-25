@@ -27,6 +27,7 @@ private:
     vector<cItem*>inventory;
     int queue;
     SDL_Rect rq;
+    SDL_Surface *asur;
     
 public:
     

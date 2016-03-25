@@ -7,22 +7,46 @@
 #include "npc.h"
 #include "listManager.h"
 #include "ParticleEngine.h"
+#include "luaCalls.h"
+#include "SDL_ttf.h"
+#include "LuaPrompt.h"
+
+extern "C"
+{
+#include "lauxlib.h"
+#include "lualib.h"
+    
+}
+SDL_Event event;
 
 bool running = true;
 SDL_Surface *screen,*background;
 SDL_Surface *tiles[5];
 SDL_Rect camera;
+TTF_Font *font;
+
+vector<cNpc*>npc;
+
+lua_State *L;
 
 using namespace std;
 
 int main(int argc,char* argv[])
 {
     SDL_Init(SDL_INIT_EVERYTHING);
-    screen = SDL_SetVideoMode(640,480,32,SDL_INIT_JOYSTICK|SDL_FULLSCREEN);
+    TTF_Init();
+    
+    LuaPrompt prompt;
+    prompt.PromptActive = true;
+    screen = SDL_SetVideoMode(640,480,32,SDL_INIT_JOYSTICK|SDL_OPENGLBLIT);
     
     SDL_Joystick *joystick;
     SDL_JoystickEventState(SDL_ENABLE);
     joystick = SDL_JoystickOpen(0);
+    
+    L = luaL_newstate();
+    luaL_openlibs(L);
+    lua_register(L,"setNpc",setNpc);
     
     cTile map1;
     map1.LoadMap("/Users/martindionisi/Desktop/openworld/openworld/map.txt");
@@ -31,15 +55,14 @@ int main(int argc,char* argv[])
     tiles[2] = SDL_LoadBMP("/Users/martindionisi/Desktop/openworld/openworld/tile3.bmp");
     tiles[3] = NULL;
     
-    vec2d l1 = {1,1};
-    vec2d l2 = {1,-1};
+    vec2d l1 = {1.5,0};
+    vec2d l2 = {0,1.5};
     vec2d pos = {320,240};
     
     ParticleEngine par(4000,l1,l2,pos);
     
     cPlayer player(0,100,20,40,2,2,2,"/Users/martindionisi/Desktop/openworld/openworld/mario.bmp",3);
     
-    vector<cNpc*>npc;
     LoadNpcList(&npc,"/Users/martindionisi/Desktop/openworld/openworld/npcl.txt");
     
     vector<cItem*>items;
@@ -58,7 +81,7 @@ int main(int argc,char* argv[])
     Inventory inv;
     while(running)
     {
-        SDL_Event event;
+        
         player.Interact(npc);
         while(SDL_PollEvent(&event))
         {
@@ -68,6 +91,7 @@ int main(int argc,char* argv[])
             }
             inv.HandleInput(event,player,items);
             player.HandleInput(event);
+            prompt.handle_input();
         }
         
         for(int i = 0;i<npc.size();i++)
@@ -90,14 +114,14 @@ int main(int argc,char* argv[])
         }
         player.Render(camera);
         par.SetPos(player.getBox()->x-camera.x,player.getBox()->y-camera.y);
-        par.Run();
+        //par.Run();
         par.Render();
         map1.RenderLayer(tiles,1);
-        //inv.Render();
-    
+        inv.Render();
+        
+        prompt.update(screen);
         
         SDL_GL_SwapBuffers();
-
         SDL_Flip(screen);
     }
 

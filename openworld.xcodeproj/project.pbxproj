@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		DD2415251C24FFE5009C2322 /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD2415231C24FFE5009C2322 /* Animation.cpp */; };
+		DD35BBE01CA4B59A0088210D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD35BBDF1CA4B59A0088210D /* main.cpp */; };
+		DD35BBE51CA4B8C40088210D /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD35BBE21CA4B8C40088210D /* liblua.a */; };
+		DD35BBE81CA4C02C0088210D /* LuaPrompt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD35BBE61CA4C02C0088210D /* LuaPrompt.cpp */; };
+		DD35BBEA1CA4C0960088210D /* SDL_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD35BBE91CA4C0960088210D /* SDL_ttf.framework */; };
 		DD3A056E1A9EBEEE003AEB27 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3A056D1A9EBEEE003AEB27 /* SDL.framework */; };
 		DD3A05711A9EBF03003AEB27 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3A05701A9EBF03003AEB27 /* SDLMain.m */; };
 		DD3A05901A9EC7B6003AEB27 /* npc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD3A05861A9EC7B6003AEB27 /* npc.cpp */; };
 		DD3A05921A9EC7B6003AEB27 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD3A058A1A9EC7B6003AEB27 /* Player.cpp */; };
 		DD3A05931A9EC7B6003AEB27 /* Tile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD3A058C1A9EC7B6003AEB27 /* Tile.cpp */; };
-		DD3A05951A9ECA14003AEB27 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD3A05941A9ECA14003AEB27 /* main.cpp */; };
 		DD8DAA991C0F7C9500E138BF /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD8DAA981C0F7C9500E138BF /* Item.cpp */; };
 		DD8DAA9C1C11F5E600E138BF /* Inventory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD8DAA9B1C11F5E600E138BF /* Inventory.cpp */; };
 /* End PBXBuildFile section */
@@ -35,6 +38,17 @@
 		DD2415241C24FFE5009C2322 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		DD2415261C25018C009C2322 /* Luigi.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Luigi.bmp; sourceTree = "<group>"; };
 		DD30B82A1C729F8100835197 /* listManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = listManager.h; sourceTree = "<group>"; };
+		DD35BB911CA4A8260088210D /* luaCalls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = luaCalls.h; sourceTree = "<group>"; };
+		DD35BBDF1CA4B59A0088210D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		DD35BBE11CA4B8C40088210D /* lauxlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lauxlib.h; path = "../../../Downloads/lua-5.1/src/lauxlib.h"; sourceTree = "<group>"; };
+		DD35BBE21CA4B8C40088210D /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = "../../../Downloads/lua-5.1/src/liblua.a"; sourceTree = "<group>"; };
+		DD35BBE31CA4B8C40088210D /* lua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua.h; path = "../../../Downloads/lua-5.1/src/lua.h"; sourceTree = "<group>"; };
+		DD35BBE41CA4B8C40088210D /* lualib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lualib.h; path = "../../../Downloads/lua-5.1/src/lualib.h"; sourceTree = "<group>"; };
+		DD35BBE61CA4C02C0088210D /* LuaPrompt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaPrompt.cpp; sourceTree = "<group>"; };
+		DD35BBE71CA4C02C0088210D /* LuaPrompt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaPrompt.h; sourceTree = "<group>"; };
+		DD35BBE91CA4C0960088210D /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_ttf.framework; path = ../../../../../Volumes/SDL_ttf/SDL_ttf.framework; sourceTree = "<group>"; };
+		DD35BBEC1CA4C1F70088210D /* SDL_ttf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_ttf.h; path = ../../../../../Volumes/SDL_ttf/SDL_ttf.framework/Versions/A/Headers/SDL_ttf.h; sourceTree = "<group>"; };
+		DD35BBF21CA4C8250088210D /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arial.ttf; sourceTree = "<group>"; };
 		DD3A05631A9EBE70003AEB27 /* openworld */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = openworld; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD3A056D1A9EBEEE003AEB27 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = ../../sdl/SDL/SDL.framework; sourceTree = "<group>"; };
 		DD3A056F1A9EBF03003AEB27 /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = "<group>"; };
@@ -45,7 +59,6 @@
 		DD3A058B1A9EC7B6003AEB27 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		DD3A058C1A9EC7B6003AEB27 /* Tile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tile.cpp; sourceTree = "<group>"; };
 		DD3A058D1A9EC7B6003AEB27 /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tile.h; sourceTree = "<group>"; };
-		DD3A05941A9ECA14003AEB27 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DD3A05961A9ECAFC003AEB27 /* background.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = background.bmp; sourceTree = "<group>"; };
 		DD3A05971A9ECAFC003AEB27 /* bullet.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = bullet.bmp; sourceTree = "<group>"; };
 		DD3A05981A9ECAFC003AEB27 /* enemy1.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = enemy1.bmp; sourceTree = "<group>"; };
@@ -70,6 +83,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD35BBEA1CA4C0960088210D /* SDL_ttf.framework in Frameworks */,
+				DD35BBE51CA4B8C40088210D /* liblua.a in Frameworks */,
 				DD3A056E1A9EBEEE003AEB27 /* SDL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -80,9 +95,16 @@
 		DD3A055A1A9EBE70003AEB27 = {
 			isa = PBXGroup;
 			children = (
+				DD35BBE91CA4C0960088210D /* SDL_ttf.framework */,
 				DD3A056D1A9EBEEE003AEB27 /* SDL.framework */,
 				DD3A05651A9EBE70003AEB27 /* openworld */,
 				DD3A05641A9EBE70003AEB27 /* Products */,
+				DD35BBF21CA4C8250088210D /* Arial.ttf */,
+				DD35BBE11CA4B8C40088210D /* lauxlib.h */,
+				DD35BBE21CA4B8C40088210D /* liblua.a */,
+				DD35BBEC1CA4C1F70088210D /* SDL_ttf.h */,
+				DD35BBE31CA4B8C40088210D /* lua.h */,
+				DD35BBE41CA4B8C40088210D /* lualib.h */,
 				DD3A056F1A9EBF03003AEB27 /* SDLMain.h */,
 				DD3A05701A9EBF03003AEB27 /* SDLMain.m */,
 				DD3A05961A9ECAFC003AEB27 /* background.bmp */,
@@ -110,7 +132,8 @@
 		DD3A05651A9EBE70003AEB27 /* openworld */ = {
 			isa = PBXGroup;
 			children = (
-				DD3A05941A9ECA14003AEB27 /* main.cpp */,
+				DD35BBDF1CA4B59A0088210D /* main.cpp */,
+				DD35BB911CA4A8260088210D /* luaCalls.h */,
 				DD30B82A1C729F8100835197 /* listManager.h */,
 				DD8DAA961C0E453100E138BF /* Physics.h */,
 				DD8DAA9B1C11F5E600E138BF /* Inventory.cpp */,
@@ -123,6 +146,8 @@
 				DD3A058B1A9EC7B6003AEB27 /* Player.h */,
 				DD2415241C24FFE5009C2322 /* Animation.h */,
 				DD2415231C24FFE5009C2322 /* Animation.cpp */,
+				DD35BBE61CA4C02C0088210D /* LuaPrompt.cpp */,
+				DD35BBE71CA4C02C0088210D /* LuaPrompt.h */,
 				DD3A058C1A9EC7B6003AEB27 /* Tile.cpp */,
 				DD3A058D1A9EC7B6003AEB27 /* Tile.h */,
 				DDC2D6641C99A19400D0330B /* Particle.h */,
@@ -189,11 +214,12 @@
 			files = (
 				DD8DAA991C0F7C9500E138BF /* Item.cpp in Sources */,
 				DD3A05711A9EBF03003AEB27 /* SDLMain.m in Sources */,
+				DD35BBE81CA4C02C0088210D /* LuaPrompt.cpp in Sources */,
 				DD3A05901A9EC7B6003AEB27 /* npc.cpp in Sources */,
 				DD3A05921A9EC7B6003AEB27 /* Player.cpp in Sources */,
-				DD3A05951A9ECA14003AEB27 /* main.cpp in Sources */,
 				DD8DAA9C1C11F5E600E138BF /* Inventory.cpp in Sources */,
 				DD2415251C24FFE5009C2322 /* Animation.cpp in Sources */,
+				DD35BBE01CA4B59A0088210D /* main.cpp in Sources */,
 				DD3A05931A9EC7B6003AEB27 /* Tile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,7 +308,18 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/martindionisi/Desktop/sdl/SDL,
+					/Volumes/SDL_ttf,
+					/Volumes/SDL_ttf/SDL_ttf.framework/Versions/A/Frameworks,
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/martindionisi/Downloads/lua-5.3_MacOS1010_lib/liblua53",
+					"/Users/martindionisi/Downloads/lua-5.3_MacOS1010_lib",
+					"/Users/martindionisi/Downloads/lua-5.1.5/src",
+					"/Users/martindionisi/Downloads/lua-5.1/src",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -294,7 +331,18 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/martindionisi/Desktop/sdl/SDL,
+					/Volumes/SDL_ttf,
+					/Volumes/SDL_ttf/SDL_ttf.framework/Versions/A/Frameworks,
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/martindionisi/Downloads/lua-5.3_MacOS1010_lib/liblua53",
+					"/Users/martindionisi/Downloads/lua-5.3_MacOS1010_lib",
+					"/Users/martindionisi/Downloads/lua-5.1.5/src",
+					"/Users/martindionisi/Downloads/lua-5.1/src",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
