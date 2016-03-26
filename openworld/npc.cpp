@@ -17,10 +17,11 @@ cNpc::cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,in
     ySpeed = yVel;
     ranim = new Animation(0,0,w,h,nx,10);
     lanim = new Animation(0,h,w,h,nx,10);
+    moving = false;
     Hp = hp;
     Power = power;
     rep = rp;
-    setSquarePath(150, 100);
+    //setSquarePath(150, 100);
     image = SDL_LoadBMP(file);
     SDL_SetColorKey(image,SDL_SRCCOLORKEY,SDL_MapRGB(image->format,0,255,255));
 }
@@ -56,6 +57,23 @@ void cNpc::Interact(vector<cNpc*>n)
     }
     
     
+}
+
+void cNpc::setSpeed(float n)
+{
+    xVel = n;
+    yVel = n;
+}
+
+void cNpc::setPos(int x, int y)
+{
+    box.x = x;
+    box.y = y;
+}
+
+void cNpc::setRep(int n)
+{
+    rep = n;
 }
 
 void cNpc::setSquarePath(int width, int height)
@@ -151,11 +169,15 @@ void cNpc::Interact(cPlayer p)
 
     }
     else{
-        
+    
         xVel = xSpeed;
         yVel = ySpeed;
         onradar = false;
     }
+    if(moving){
+        runPath();
+    }
+    
 }
 
 void cNpc::Move(int x, int y)

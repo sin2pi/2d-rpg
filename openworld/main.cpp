@@ -26,6 +26,7 @@ SDL_Rect camera;
 TTF_Font *font;
 
 vector<cNpc*>npc;
+vector<cItem*>items;
 
 lua_State *L;
 
@@ -46,7 +47,14 @@ int main(int argc,char* argv[])
     
     L = luaL_newstate();
     luaL_openlibs(L);
+    //*static_cast<cPlayer**>(lua_getextraspace(L)) = &distance;
     lua_register(L,"setNpc",setNpc);
+    lua_register(L,"npcPos",setNpcPos);
+    lua_register(L,"npcSpeed",setNpcSpeed);
+    lua_register(L,"npcRep",setNpcRep);
+    lua_register(L,"npcStart",npcstart);
+    lua_register(L,"npcStop",npcstop);
+    lua_register(L,"npcPath",setNpcPath);
     
     cTile map1;
     map1.LoadMap("/Users/martindionisi/Desktop/openworld/openworld/map.txt");
@@ -64,10 +72,7 @@ int main(int argc,char* argv[])
     cPlayer player(0,100,20,40,2,2,2,"/Users/martindionisi/Desktop/openworld/openworld/mario.bmp",3);
     
     LoadNpcList(&npc,"/Users/martindionisi/Desktop/openworld/openworld/npcl.txt");
-    
-    vector<cItem*>items;
     LoadItemList(&items,"/Users/martindionisi/Desktop/openworld/openworld/iteml.txt");
-
     
     printf("%i joysticks were found.\n\n", SDL_NumJoysticks() );
     printf("The names of the joysticks are:\n");
@@ -96,7 +101,7 @@ int main(int argc,char* argv[])
         
         for(int i = 0;i<npc.size();i++)
         {
-            npc.at(i)->runPath();
+            //npc.at(i)->runPath();
             npc.at(i)->Interact(player);
             npc.at(i)->Interact(npc);
             

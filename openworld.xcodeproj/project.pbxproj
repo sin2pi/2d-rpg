@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD23334C1CA61DE3001100CC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD23334B1CA61DE3001100CC /* main.cpp */; };
 		DD2415251C24FFE5009C2322 /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD2415231C24FFE5009C2322 /* Animation.cpp */; };
-		DD35BBE01CA4B59A0088210D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD35BBDF1CA4B59A0088210D /* main.cpp */; };
 		DD35BBE51CA4B8C40088210D /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD35BBE21CA4B8C40088210D /* liblua.a */; };
 		DD35BBE81CA4C02C0088210D /* LuaPrompt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD35BBE61CA4C02C0088210D /* LuaPrompt.cpp */; };
 		DD35BBEA1CA4C0960088210D /* SDL_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD35BBE91CA4C0960088210D /* SDL_ttf.framework */; };
@@ -34,12 +34,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DD23334B1CA61DE3001100CC /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DD2415231C24FFE5009C2322 /* Animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animation.cpp; sourceTree = "<group>"; };
 		DD2415241C24FFE5009C2322 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		DD2415261C25018C009C2322 /* Luigi.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Luigi.bmp; sourceTree = "<group>"; };
 		DD30B82A1C729F8100835197 /* listManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = listManager.h; sourceTree = "<group>"; };
 		DD35BB911CA4A8260088210D /* luaCalls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = luaCalls.h; sourceTree = "<group>"; };
-		DD35BBDF1CA4B59A0088210D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DD35BBE11CA4B8C40088210D /* lauxlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lauxlib.h; path = "../../../Downloads/lua-5.1/src/lauxlib.h"; sourceTree = "<group>"; };
 		DD35BBE21CA4B8C40088210D /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = "../../../Downloads/lua-5.1/src/liblua.a"; sourceTree = "<group>"; };
 		DD35BBE31CA4B8C40088210D /* lua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua.h; path = "../../../Downloads/lua-5.1/src/lua.h"; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 		DD3A05651A9EBE70003AEB27 /* openworld */ = {
 			isa = PBXGroup;
 			children = (
-				DD35BBDF1CA4B59A0088210D /* main.cpp */,
+				DD23334B1CA61DE3001100CC /* main.cpp */,
 				DD35BB911CA4A8260088210D /* luaCalls.h */,
 				DD30B82A1C729F8100835197 /* listManager.h */,
 				DD8DAA961C0E453100E138BF /* Physics.h */,
@@ -214,12 +214,12 @@
 			files = (
 				DD8DAA991C0F7C9500E138BF /* Item.cpp in Sources */,
 				DD3A05711A9EBF03003AEB27 /* SDLMain.m in Sources */,
+				DD23334C1CA61DE3001100CC /* main.cpp in Sources */,
 				DD35BBE81CA4C02C0088210D /* LuaPrompt.cpp in Sources */,
 				DD3A05901A9EC7B6003AEB27 /* npc.cpp in Sources */,
 				DD3A05921A9EC7B6003AEB27 /* Player.cpp in Sources */,
 				DD8DAA9C1C11F5E600E138BF /* Inventory.cpp in Sources */,
 				DD2415251C24FFE5009C2322 /* Animation.cpp in Sources */,
-				DD35BBE01CA4B59A0088210D /* main.cpp in Sources */,
 				DD3A05931A9EC7B6003AEB27 /* Tile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,6 +317,7 @@
 					"/Users/martindionisi/Downloads/lua-5.3_MacOS1010_lib",
 					"/Users/martindionisi/Downloads/lua-5.1.5/src",
 					"/Users/martindionisi/Downloads/lua-5.1/src",
+					/usr/local/Cellar/luabind/0.9.1_1/lib,
 				);
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -340,6 +341,7 @@
 					"/Users/martindionisi/Downloads/lua-5.3_MacOS1010_lib",
 					"/Users/martindionisi/Downloads/lua-5.1.5/src",
 					"/Users/martindionisi/Downloads/lua-5.1/src",
+					/usr/local/Cellar/luabind/0.9.1_1/lib,
 				);
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";

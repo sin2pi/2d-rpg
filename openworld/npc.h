@@ -25,6 +25,7 @@ class cNpc
     int rad = 150;
     bool ontrack;
     bool onradar;
+    bool moving;
     int nx;
     Animation *ranim;
     Animation *lanim;
@@ -36,7 +37,13 @@ class cNpc
     SDL_Rect *getBox(){ return &box;}
     float getXvel() { return xVel;};
     float getYvel() { return yVel;};
+    int getRep(){return rep;};
+    void startPath(){moving = true;};
+    void stopPath(){moving = false;};
     void setSquarePath(int width, int height);
+    void setSpeed(float n);
+    void setRep(int n);
+    void setPos(int x,int y);
     void runPath();
     void Interact(cPlayer p);
     void Interact(vector<cNpc*>n);

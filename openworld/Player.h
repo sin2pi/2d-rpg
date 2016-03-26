@@ -16,8 +16,7 @@ class cPlayer
     
     SDL_Surface *image;
     float acceleration;
-    float xSpeed,ySpeed;
-    float xVel,yVel;
+    
     SDL_Rect box;
     vector<Animation*>idle;
     Animation *ranim;
@@ -26,7 +25,8 @@ class cPlayer
     int dir[4] = {0,0,0,0};
     
     public:
-    
+    float xSpeed,ySpeed;
+    float xVel,yVel;
     SDL_Rect *getBox(){ return &box;}
     cPlayer(float x,float y,int w,int h,float xspeed,float yspeed,float acc,const char*file,int nx);
     SDL_Rect SetCamera(SDL_Rect cam);
