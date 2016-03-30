@@ -16,7 +16,7 @@ cPlayer::cPlayer(float x,float y,int w,int h,float xspeed,float yspeed,float acc
     SDL_Rect rect = {0,0,static_cast<Uint16>(w),static_cast<Uint16>(h)};
     idle.push_back(new Animation(0,0,w,h,1,10));
     rect = {0,static_cast<Sint16>(h),static_cast<Uint16>(w),static_cast<Uint16>(h)};
-    idle.push_back(new Animation(0,h,w,h,1,10));
+    idle.push_back(new Animation(w*2,h,w,h,1,10));
     SDL_SetColorKey(image,SDL_SRCCOLORKEY,SDL_MapRGB(image->format,0,255,255));
     idleframe = 0;
 }
@@ -248,6 +248,7 @@ void cPlayer::Render(SDL_Rect camera)
     
     if(dir[1])
     {
+        
         lanim->RunAnimation(rect,image);
     }
     else if(dir[3])

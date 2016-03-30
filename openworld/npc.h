@@ -23,24 +23,38 @@ class cNpc
     bool friends;
     int rep;
     int rad = 150;
+    bool rmoving;
     bool ontrack;
     bool onradar;
     bool moving;
+    int vrtRange;
+    int timeRange;
+    int horRange;
+    int iX,iY;
     int nx;
     Animation *ranim;
     Animation *lanim;
+    Animation *idle[2];
+    int idleframe;
     vec2d vrt[4];
-    
+    bool ontarget = false;
+    int movNum = 2;
+    int x,y;
+    Uint32 timer;
  
     public:
+    
     cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,int rp,const char*file,int nx);
     SDL_Rect *getBox(){ return &box;}
     float getXvel() { return xVel;};
     float getYvel() { return yVel;};
     int getRep(){return rep;};
-    void startPath(){moving = true;};
-    void stopPath(){moving = false;};
+    bool isonTarget(int tx,int ty);
+    void startPath(int type);
+    void stopPath();
     void setSquarePath(int width, int height);
+    void setRandPath(int ix,int iy,int hr,int vr,int tr);
+    void runRandPath();
     void setSpeed(float n);
     void setRep(int n);
     void setPos(int x,int y);

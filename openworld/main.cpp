@@ -39,7 +39,7 @@ int main(int argc,char* argv[])
     
     LuaPrompt prompt;
     prompt.PromptActive = true;
-    screen = SDL_SetVideoMode(640,480,32,SDL_INIT_JOYSTICK|SDL_OPENGLBLIT);
+    screen = SDL_SetVideoMode(640,480,16,SDL_INIT_JOYSTICK|SDL_OPENGLBLIT);
     
     SDL_Joystick *joystick;
     SDL_JoystickEventState(SDL_ENABLE);
@@ -48,13 +48,7 @@ int main(int argc,char* argv[])
     L = luaL_newstate();
     luaL_openlibs(L);
     //*static_cast<cPlayer**>(lua_getextraspace(L)) = &distance;
-    lua_register(L,"setNpc",setNpc);
-    lua_register(L,"npcPos",setNpcPos);
-    lua_register(L,"npcSpeed",setNpcSpeed);
-    lua_register(L,"npcRep",setNpcRep);
-    lua_register(L,"npcStart",npcstart);
-    lua_register(L,"npcStop",npcstop);
-    lua_register(L,"npcPath",setNpcPath);
+    RegisterCalls(L);
     
     cTile map1;
     map1.LoadMap("/Users/martindionisi/Desktop/openworld/openworld/map.txt");
@@ -74,6 +68,8 @@ int main(int argc,char* argv[])
     LoadNpcList(&npc,"/Users/martindionisi/Desktop/openworld/openworld/npcl.txt");
     LoadItemList(&items,"/Users/martindionisi/Desktop/openworld/openworld/iteml.txt");
     
+    npc.at(1)->setRandPath(npc.at(1)->getBox()->x, npc.at(1)->getBox()->y,200, 200, 5);
+    
     printf("%i joysticks were found.\n\n", SDL_NumJoysticks() );
     printf("The names of the joysticks are:\n");
     
@@ -84,6 +80,9 @@ int main(int argc,char* argv[])
     printf("\n-*-*-*-*-*-*-*-*-*-");
     
     Inventory inv;
+    
+    int numFrames = 0;
+    Uint32 startTime = SDL_GetTicks();
     while(running)
     {
         
@@ -106,6 +105,7 @@ int main(int argc,char* argv[])
             npc.at(i)->Interact(npc);
             
         }
+        npc.at(1)->runRandPath();
         player.Move();
         camera = player.SetCamera(camera);
         map1.RenderLayer(tiles,0);
@@ -126,6 +126,9 @@ int main(int argc,char* argv[])
         
         prompt.update(screen);
         
+        numFrames++;
+        int fps = (numFrames/(float)(SDL_GetTicks() - startTime) )*1000;
+        cout << "fps: " << fps;
         SDL_GL_SwapBuffers();
         SDL_Flip(screen);
     }

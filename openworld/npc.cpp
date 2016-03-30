@@ -17,6 +17,9 @@ cNpc::cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,in
     ySpeed = yVel;
     ranim = new Animation(0,0,w,h,nx,10);
     lanim = new Animation(0,h,w,h,nx,10);
+    idle[0] = new Animation(0,0,w,h,1,10);
+    idle[1] = new Animation(0,h,w,h,1,10);
+    //idle = new Animation()
     moving = false;
     Hp = hp;
     Power = power;
@@ -24,6 +27,11 @@ cNpc::cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,in
     //setSquarePath(150, 100);
     image = SDL_LoadBMP(file);
     SDL_SetColorKey(image,SDL_SRCCOLORKEY,SDL_MapRGB(image->format,0,255,255));
+}
+
+int Rand(int min, int max)
+{
+    return rand()%(max-min + 1) + min;
 }
 
 void cNpc::Interact(vector<cNpc*>n)
@@ -63,6 +71,8 @@ void cNpc::setSpeed(float n)
 {
     xVel = n;
     yVel = n;
+    xSpeed = n;
+    ySpeed = n;
 }
 
 void cNpc::setPos(int x, int y)
@@ -82,6 +92,71 @@ void cNpc::setSquarePath(int width, int height)
     vrt[1] = {static_cast<float>(box.x + width),static_cast<float>(box.y)};
     vrt[2] = {static_cast<float>(box.x + width),static_cast<float>(box.y+height)};
     vrt[3] = {static_cast<float>(box.x),static_cast<float>(box.y+height)};
+}
+
+void cNpc::setRandPath(int ix, int iy, int hr, int vr, int tr)
+{
+    iX = ix;
+    iY = iy;
+    timeRange = tr*1000;
+    horRange = hr;
+    vrtRange = vr;
+    x = Rand(iX - horRange/2,iX+horRange/2);
+    y = Rand(iY - vrtRange/2,iY+vrtRange/2);
+}
+
+bool cNpc::isonTarget(int tx,int ty)
+{
+    if(box.x == tx && box.y == ty){
+        return true;
+    }
+    else return false;
+}
+
+bool isodd(int n)
+{
+    if(n % 2 == 0)
+        return true;
+    else
+        return false;
+}
+
+void cNpc::runRandPath()
+{
+    if(!ontarget && isodd(movNum)){
+        Move(x,box.y);
+        //movNum ++;
+        if(isonTarget(x,box.y)){
+            ontarget = true;
+            timer = SDL_GetTicks();
+        }
+    }
+    if(ontarget  && isodd(movNum)){
+        x = Rand(iX - horRange/2,iX+horRange/2);
+        y = Rand(iY - vrtRange/2,iY+vrtRange/2);
+        if(SDL_GetTicks() > timer +  Rand(1000,timeRange)){
+            ontarget = false;
+            movNum ++;
+        }
+    }
+    if(!ontarget && !isodd(movNum)){
+        Move(box.x,y);
+        if(isonTarget(box.x,y)){
+            ontarget = true;
+            timer = SDL_GetTicks();
+        }
+    }
+    if (ontarget  && !isodd(movNum)){
+        x = Rand(iX - horRange/2,iX+horRange/2);
+        y = Rand(iY - vrtRange/2,iY+vrtRange/2);
+        if(SDL_GetTicks() > timer +  Rand(1000,timeRange)){
+            ontarget = false;
+            movNum ++;
+        }
+    }
+    
+    
+    
 }
 
 void cNpc::runPath()
@@ -105,6 +180,24 @@ void cNpc::runPath()
     }
     if(!ontrack && !onradar)
         Move(vrt[0].x,vrt[0].y);
+}
+
+void cNpc::startPath(int type)
+{
+    if(type == 1){
+        moving = true;
+        rmoving = false;
+    }
+    if (type == 2){
+        rmoving = true;
+        moving = false;
+    }
+}
+
+void cNpc::stopPath()
+{
+    rmoving = false;
+    moving = false;
 }
 
 void cNpc::Interact(cPlayer p)
@@ -172,10 +265,17 @@ void cNpc::Interact(cPlayer p)
     
         xVel = xSpeed;
         yVel = ySpeed;
+        side[0] = 0;
+        side[1] = 0;
+        side[2] = 0;
+        side[3] = 0;
         onradar = false;
     }
     if(moving){
         runPath();
+    }
+    if(rmoving){
+        runRandPath();
     }
     
 }
@@ -216,11 +316,13 @@ void cNpc::Move(int x, int y)
              box.x -= xVel;
              side[1] = 0;
              side[3] = 1;
+              idleframe = 1;
              }
           if (x > box.x){
              box.x += xVel;
              side[1] = 1;
              side[3] = 0;
+              idleframe = 0;
              }
          if(box.x == x)
          {
@@ -251,5 +353,10 @@ void cNpc::Render()
         {
             ranim->RunAnimation(rect,image);
         }
+        else
+        {
+            idle[idleframe]->RunAnimation(rect,image);
+        }
+        
     }
 }

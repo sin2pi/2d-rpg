@@ -72,13 +72,36 @@ int setNpcPath(lua_State *L){
 }
 
 int npcstart(lua_State *L){
-    npc.at(lua_tonumber(L,-lua_gettop(L)))->startPath();
+    npc.at(lua_tonumber(L,-lua_gettop(L)))->startPath(lua_tonumber(L,-lua_gettop(L)+1));
     return 0;
 }
 
 int npcstop(lua_State *L){
     npc.at(lua_tonumber(L,-lua_gettop(L)))->stopPath();
     return 0;
+}
+
+int setNpcRandPath(lua_State *L){
+    int ix = lua_tonumber(L,-lua_gettop(L)+1);
+    int iy = lua_tonumber(L,-lua_gettop(L)+2);
+    int hr = lua_tonumber(L,-lua_gettop(L)+3);
+    int vr = lua_tonumber(L,-lua_gettop(L)+4);
+    int tr = lua_tonumber(L,-lua_gettop(L)+5);
+    npc.at(lua_tonumber(L,-lua_gettop(L)))->setRandPath(ix, iy, hr, vr, tr);
+    
+    return 1;
+}
+
+void RegisterCalls(lua_State *L)
+{
+    lua_register(L,"setNpc",setNpc);
+    lua_register(L,"npcPos",setNpcPos);
+    lua_register(L,"npcSpeed",setNpcSpeed);
+    lua_register(L,"npcRep",setNpcRep);
+    lua_register(L,"npcStart",npcstart);
+    lua_register(L,"npcStop",npcstop);
+    lua_register(L,"npcPath",setNpcPath);
+    lua_register(L,"npcRandPath",setNpcRandPath);
 }
 
 

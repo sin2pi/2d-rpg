@@ -57,7 +57,8 @@ void cTile::RenderLayer(SDL_Surface *tiles[],int ln)
 		    SDL_Rect rect;
 		    rect.x = i*tiles[0]->w - camera.x;
 		    rect.y = j*tiles[0]->h - camera.y;
-                SDL_BlitSurface(tiles[layer[i][j][ln]],NULL,screen,&rect);
+            //SDL_DisplayFormat(*tiles);
+            SDL_BlitSurface(tiles[layer[i][j][ln]],NULL,screen,&rect);
 		}
 	}
 }
