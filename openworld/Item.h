@@ -9,7 +9,7 @@
 #ifndef openworld_Item_h
 #define openworld_Item_h
 
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include "Player.h"
 #include "Physics.h"
 #include "Inventory.h"
@@ -22,6 +22,7 @@ private:
     
     SDL_Rect box;
     SDL_Surface *image;
+    SDL_Texture *txt;
     bool used,dropped;
     int state;
     string filename;
@@ -35,7 +36,7 @@ public:
     SDL_Rect getPos(){ return box;};
     int getState(){ return state;};
     void setPos(int x,int y){box = {static_cast<Sint16>(x),static_cast<Sint16>(y),box.w,box.h};};
-    SDL_Surface *getImage(){return image;};
+    SDL_Texture *getImage(){return txt;};
     int getId(){return id;};
 };
 

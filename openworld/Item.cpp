@@ -20,6 +20,7 @@ cItem::cItem(int xpos,int ypos,int w,int h,string file,int index)
     const char *f =file.c_str();
     grabed = false;
     image = SDL_LoadBMP(f);
+    txt = SDL_CreateTextureFromSurface(SDL_GetRenderer(SDL_GetWindowFromID(1)),image);
     id = index;
 }
 
@@ -57,9 +58,10 @@ void cItem::Interact(SDL_Event event,cPlayer player,Inventory *inv)
 
 void cItem::Render()
 {
-    SDL_Rect box1 = {static_cast<Sint16>(box.x-camera.x),static_cast<Sint16>(box.y-camera.y)};
-    if(grabed == false)
-        SDL_BlitSurface(image,NULL,SDL_GetVideoSurface(),&box1);
+    SDL_Rect box1 = {static_cast<Sint16>(box.x-camera.x),static_cast<Sint16>(box.y-camera.y),box.w,box.h};
+    if(grabed == false){
+        SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindowFromID(1)),txt,NULL,&box1);
+    }
 }
 
 

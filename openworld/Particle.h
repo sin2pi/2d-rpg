@@ -9,7 +9,7 @@
 #ifndef ParticleEngine_Particle_h
 #define ParticleEngine_Particle_h
 
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include <vector>
 
 
@@ -32,50 +32,14 @@ private:
     
 public:
     vec2d dir;
-    Particle(vec2d p,vec2d d,float s,int lf){
-        pos.x = p.x;
-        pos.y = p.y;
-        pos.w = 4;
-        pos.h = 4;
-        ix = p.x;
-        iy = p.y;
-        dir.x = d.x;
-        dir.y = d.y;
-        speed = s;
-        timer = SDL_GetTicks()+lf;
-        life = lf;
-    }
+    Particle(vec2d p,vec2d d,float s,int lf);
     Particle(){};
     
-    void Update(){
-        if(!isDead()){
-            pos.x += dir.x * speed;
-            pos.y += dir.y * speed;
-        }
-        
-    }
+    void Update();
     
-    bool isDead(){
-        if(SDL_GetTicks() > timer)
-            return true;
-        if(pos.x < 0)
-            return true;
-        if(pos.y < 0)
-            return true;
-        if(pos.x > 640)
-            return true;
-        if(pos.y > 480)
-            return true;
-        
-        
-        return false;
-    }
+    bool isDead();
     
-    void Render()
-    {
-        if(!isDead())
-            SDL_FillRect(SDL_GetVideoSurface(),&pos,SDL_MapRGB(SDL_GetVideoSurface()->format,0,0,200));
-    }
+    void Render();
     
 };
 

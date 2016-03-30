@@ -68,7 +68,7 @@ void Inventory::HandleInput(SDL_Event event,cPlayer player,vector<cItem*>items)
 void Inventory::Render()
 {
     SDL_Surface *asur = SDL_LoadBMP("/Users/martindionisi/Desktop/openworld/openworld/queuerec.bmp");
-    SDL_SetAlpha(asur,SDL_SRCALPHA,120);
+    //SDL_SetAlpha(asur,SDL_SRCALPHA,120);
     if(queue < 0)
         queue = 0;
     if(queue >= inventory.size())
@@ -78,11 +78,11 @@ void Inventory::Render()
     rq = {static_cast<Sint16>((100+(queue*60))),400,40,40};
     for(int i =0; i < inventory.size();i++)
     {
-        SDL_Rect box = {static_cast<Sint16>(100+(i*60)),static_cast<Sint16>(400)};
-        SDL_BlitSurface(inventory.at(i)->getImage(),NULL,SDL_GetVideoSurface(),&box);
+        SDL_Rect box = {static_cast<Sint16>(100+(i*60)),static_cast<Sint16>(400),32,32};
+        SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindowFromID(1)),inventory.at(i)->getImage(),NULL,&box);
         
     }
-    SDL_BlitSurface(asur,NULL,SDL_GetVideoSurface(),&rq);
+    //SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindowFromID(NULL)),txt,NULL,&rq);
     SDL_FreeSurface(asur);
     
 }

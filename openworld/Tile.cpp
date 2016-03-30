@@ -1,7 +1,6 @@
 #include "Tile.h"
 
 extern SDL_Rect camera;
-extern SDL_Surface *screen;
 
 cTile::cTile()
 {
@@ -48,17 +47,20 @@ void cTile::LoadMap(const char *filename)
     }
 }
 
-void cTile::RenderLayer(SDL_Surface *tiles[],int ln)
+void cTile::RenderLayer(SDL_Texture *tiles[],int ln)
 {
     for(int i = 0; i < mapSizeX; i++)
 	{
 		for(int j = 0; j < mapSizeY; j++)
 		{
 		    SDL_Rect rect;
-		    rect.x = i*tiles[0]->w - camera.x;
-		    rect.y = j*tiles[0]->h - camera.y;
+		    rect.x = i*32 - camera.x;
+		    rect.y = j*32 - camera.y;
+            rect.w = 32;
+            rect.h = 32;
             //SDL_DisplayFormat(*tiles);
-            SDL_BlitSurface(tiles[layer[i][j][ln]],NULL,screen,&rect);
+            
+            SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindowFromID(1)),tiles[layer[i][j][ln]],NULL,&rect);
 		}
 	}
 }

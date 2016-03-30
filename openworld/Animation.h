@@ -10,7 +10,7 @@
 #define __openworld__Animation__
 
 #include <vector>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 using namespace std;
 
@@ -29,8 +29,9 @@ public:
     
     Animation(int x,int y,int w,int h,int nx,int speed);
     
-    void RunAnimation(SDL_Rect pos,SDL_Surface*img);
-    void RenderFrame(SDL_Rect pos,SDL_Surface *img);
+    void RunAnimation(SDL_Rect pos,SDL_Texture*txt);
+
+    void RenderFrame(SDL_Rect pos,SDL_Texture *txt);
     
 };
 

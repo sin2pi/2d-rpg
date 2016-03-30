@@ -27,12 +27,14 @@ Animation::Animation(int x,int y,int w,int h,int nx,int speed)
     Speed = speed;
 }
 
-void Animation::RenderFrame(SDL_Rect pos, SDL_Surface *img)
+void Animation::RenderFrame(SDL_Rect pos, SDL_Texture *txt)
 {
-    SDL_BlitSurface(img,&clip[frame],SDL_GetVideoSurface(),&pos);
+    //SDL_Texture *txt = SDL_CreateTextureFromSurface(renderer, img);
+    SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindowFromID(1)), txt, &clip[frame],&pos);
+    //SDL_BlitSurface(img,&clip[frame],SDL_GetVideoSurface(),&pos);
 }
 
-void Animation::RunAnimation(SDL_Rect pos, SDL_Surface *img)
+void Animation::RunAnimation(SDL_Rect pos, SDL_Texture *txt)
 {
     timer ++;
     if(timer >= Speed*counter){
@@ -42,5 +44,6 @@ void Animation::RunAnimation(SDL_Rect pos, SDL_Surface *img)
     if(frame >= Nx){
         frame = 0;
     }
-    SDL_BlitSurface(img,&clip.at(frame),SDL_GetVideoSurface(),&pos);
+    
+    SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindowFromID(1)), txt, &clip[frame],&pos);
 }

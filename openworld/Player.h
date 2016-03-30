@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include <vector>
 #include "Physics.h"
 #include "npc.h"
@@ -15,6 +15,7 @@ class cPlayer
     private:
     
     SDL_Surface *image;
+    SDL_Texture *txt;
     float acceleration;
     
     SDL_Rect box;

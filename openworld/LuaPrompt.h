@@ -1,6 +1,6 @@
 #ifndef LUAPROMPT_H
 #define LUAPROMPT_H
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include <string>
 #include <SDL_ttf/SDL_ttf.h>
 extern "C"

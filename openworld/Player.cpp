@@ -1,6 +1,7 @@
 #include "Player.h"
 
 extern bool running;
+
 cPlayer::cPlayer(float x,float y,int w,int h,float xspeed,float yspeed,float acc,const char*file,int nx)
 {
     image = SDL_LoadBMP(file);
@@ -17,7 +18,8 @@ cPlayer::cPlayer(float x,float y,int w,int h,float xspeed,float yspeed,float acc
     idle.push_back(new Animation(0,0,w,h,1,10));
     rect = {0,static_cast<Sint16>(h),static_cast<Uint16>(w),static_cast<Uint16>(h)};
     idle.push_back(new Animation(w*2,h,w,h,1,10));
-    SDL_SetColorKey(image,SDL_SRCCOLORKEY,SDL_MapRGB(image->format,0,255,255));
+    //SDL_SetColorKey(image,SDL_SRCCOLORKEY,SDL_MapRGB(image->format,0,255,255));
+    txt = SDL_CreateTextureFromSurface(SDL_GetRenderer(SDL_GetWindowFromID(1)), image);
     idleframe = 0;
 }
 
@@ -97,7 +99,7 @@ void cPlayer::HandleInput(SDL_Event event)
             break;
 
         case SDL_KEYDOWN:
-            switch(event.key.keysym.sym)
+        switch(event.key.keysym.sym)
         {
                 break;
             case SDLK_UP:
@@ -118,7 +120,7 @@ void cPlayer::HandleInput(SDL_Event event)
                 
         }break;
         case SDL_KEYUP:
-            switch(event.key.keysym.sym)
+        switch(event.key.keysym.sym)
         {
                 
             case SDLK_UP:
@@ -244,30 +246,30 @@ SDL_Rect cPlayer::SetCamera(SDL_Rect cam)
 void cPlayer::Render(SDL_Rect camera)
 {
     
-    SDL_Rect rect = {static_cast<Sint16>(box.x - camera.x), static_cast<Sint16>(box.y - camera.y)};
+    SDL_Rect rect = {static_cast<Sint16>(box.x - camera.x), static_cast<Sint16>(box.y - camera.y),box.w,box.h};
     
     if(dir[1])
     {
         
-        lanim->RunAnimation(rect,image);
+        lanim->RunAnimation(rect,txt);
     }
     else if(dir[3])
     {
-        ranim->RunAnimation(rect,image);
+        ranim->RunAnimation(rect,txt);
     }
     else if(dir[0])
     {
         idleframe = 0;
-        ranim->RunAnimation(rect,image);
+        ranim->RunAnimation(rect,txt);
     }
     else if(dir[2])
     {
         idleframe = 0;
-        ranim->RunAnimation(rect,image);
+        ranim->RunAnimation(rect,txt);
     }
     
     else
-        idle.at(idleframe)->RunAnimation(rect,image);
+        idle.at(idleframe)->RunAnimation(rect,txt);
     
     //SDL_BlitSurface(image,NULL,SDL_GetVideoSurface(),&rect);
 }

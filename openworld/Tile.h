@@ -1,6 +1,6 @@
 #include <fstream>
 
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include <iostream>
 
 using namespace std;
@@ -11,7 +11,7 @@ class cTile
     
     int mapSizeX,mapSizeY;
     int ***layer = NULL;
-    
+    SDL_Texture *txt;
     int LoadCounterX,LoadCounterY;
     bool once;
     
@@ -20,6 +20,6 @@ class cTile
     cTile();
     void LoadMap(const char* filename);
     void RenderMap(SDL_Surface *tiles[]);
-    void RenderLayer(SDL_Surface *tiles[],int layer);
+    void RenderLayer(SDL_Texture *tiles[],int layer);
     
 };

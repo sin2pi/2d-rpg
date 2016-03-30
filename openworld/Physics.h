@@ -8,7 +8,7 @@
 
 #ifndef openworld_Physics_h
 #define openworld_Physics_h
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include <math.h>
 
 class Physics{

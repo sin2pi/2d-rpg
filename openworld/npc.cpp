@@ -26,7 +26,8 @@ cNpc::cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,in
     rep = rp;
     //setSquarePath(150, 100);
     image = SDL_LoadBMP(file);
-    SDL_SetColorKey(image,SDL_SRCCOLORKEY,SDL_MapRGB(image->format,0,255,255));
+    txt = SDL_CreateTextureFromSurface(SDL_GetRenderer(SDL_GetWindowFromID(1)),image);
+    //SDL_SetColorKey(image,SDL_SRCCOLORKEY,SDL_MapRGB(image->format,0,255,255));
 }
 
 int Rand(int min, int max)
@@ -335,27 +336,27 @@ void cNpc::Move(int x, int y)
 
 void cNpc::Render()
 {
-    SDL_Rect rect = {static_cast<Sint16>(box.x - camera.x), static_cast<Sint16>(box.y - camera.y)};
+    SDL_Rect rect = {static_cast<Sint16>(box.x - camera.x), static_cast<Sint16>(box.y - camera.y),box.w,box.h};
     if(Hp > 0){
         if(side[3])
         {
-            lanim->RunAnimation(rect,image);
+            lanim->RunAnimation(rect,txt);
         }
         else if(side[1])
         {
-            ranim->RunAnimation(rect,image);
+            ranim->RunAnimation(rect,txt);
         }
         else if(side[2])
         {
-            lanim->RunAnimation(rect,image);
+            lanim->RunAnimation(rect,txt);
         }
         else if(side[0])
         {
-            ranim->RunAnimation(rect,image);
+            ranim->RunAnimation(rect,txt);
         }
         else
         {
-            idle[idleframe]->RunAnimation(rect,image);
+            idle[idleframe]->RunAnimation(rect,txt);
         }
         
     }

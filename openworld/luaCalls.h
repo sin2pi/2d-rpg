@@ -39,7 +39,7 @@ int setNpc(lua_State *L){ // int x int y int spd
         hp = lua_tonumber(L,-arg+3);
         nx = 3;
     }
-    const char *f =file.c_str();
+    const char *f = file.c_str();
     npc.push_back(new cNpc(x,y,20,40,xs,ys,20,20,hp,f,nx));
     
     return 0;

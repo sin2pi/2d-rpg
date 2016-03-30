@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD196BDA1CAC33B800EDB55D /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD196BD91CAC33B800EDB55D /* Particle.cpp */; };
+		DD196BE01CAC387B00EDB55D /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD196BDF1CAC387B00EDB55D /* SDL2_ttf.framework */; };
 		DD23334C1CA61DE3001100CC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD23334B1CA61DE3001100CC /* main.cpp */; };
 		DD2415251C24FFE5009C2322 /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD2415231C24FFE5009C2322 /* Animation.cpp */; };
 		DD35BBE51CA4B8C40088210D /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD35BBE21CA4B8C40088210D /* liblua.a */; };
 		DD35BBE81CA4C02C0088210D /* LuaPrompt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD35BBE61CA4C02C0088210D /* LuaPrompt.cpp */; };
-		DD35BBEA1CA4C0960088210D /* SDL_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD35BBE91CA4C0960088210D /* SDL_ttf.framework */; };
-		DD3A056E1A9EBEEE003AEB27 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3A056D1A9EBEEE003AEB27 /* SDL.framework */; };
-		DD3A05711A9EBF03003AEB27 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3A05701A9EBF03003AEB27 /* SDLMain.m */; };
 		DD3A05901A9EC7B6003AEB27 /* npc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD3A05861A9EC7B6003AEB27 /* npc.cpp */; };
 		DD3A05921A9EC7B6003AEB27 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD3A058A1A9EC7B6003AEB27 /* Player.cpp */; };
 		DD3A05931A9EC7B6003AEB27 /* Tile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD3A058C1A9EC7B6003AEB27 /* Tile.cpp */; };
+		DD7EF1B31CAC3F7D00DD0766 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD7EF1B21CAC3F7D00DD0766 /* SDL2.framework */; };
 		DD8DAA991C0F7C9500E138BF /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD8DAA981C0F7C9500E138BF /* Item.cpp */; };
 		DD8DAA9C1C11F5E600E138BF /* Inventory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD8DAA9B1C11F5E600E138BF /* Inventory.cpp */; };
 /* End PBXBuildFile section */
@@ -34,6 +34,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DD196BD91CAC33B800EDB55D /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
+		DD196BDF1CAC387B00EDB55D /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
+		DD21DC5C1CAC2DE600ECE455 /* SDL_ttf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_ttf.h; path = ../../../../../Volumes/SDL2_ttf/SDL2_ttf.framework/Versions/A/Headers/SDL_ttf.h; sourceTree = "<group>"; };
 		DD23334B1CA61DE3001100CC /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DD2415231C24FFE5009C2322 /* Animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animation.cpp; sourceTree = "<group>"; };
 		DD2415241C24FFE5009C2322 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
@@ -46,13 +49,8 @@
 		DD35BBE41CA4B8C40088210D /* lualib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lualib.h; path = "../../../Downloads/lua-5.1/src/lualib.h"; sourceTree = "<group>"; };
 		DD35BBE61CA4C02C0088210D /* LuaPrompt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaPrompt.cpp; sourceTree = "<group>"; };
 		DD35BBE71CA4C02C0088210D /* LuaPrompt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaPrompt.h; sourceTree = "<group>"; };
-		DD35BBE91CA4C0960088210D /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_ttf.framework; path = ../../../../../Volumes/SDL_ttf/SDL_ttf.framework; sourceTree = "<group>"; };
-		DD35BBEC1CA4C1F70088210D /* SDL_ttf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_ttf.h; path = ../../../../../Volumes/SDL_ttf/SDL_ttf.framework/Versions/A/Headers/SDL_ttf.h; sourceTree = "<group>"; };
 		DD35BBF21CA4C8250088210D /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arial.ttf; sourceTree = "<group>"; };
 		DD3A05631A9EBE70003AEB27 /* openworld */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = openworld; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD3A056D1A9EBEEE003AEB27 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = ../../sdl/SDL/SDL.framework; sourceTree = "<group>"; };
-		DD3A056F1A9EBF03003AEB27 /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = "<group>"; };
-		DD3A05701A9EBF03003AEB27 /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = "<group>"; };
 		DD3A05861A9EC7B6003AEB27 /* npc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = npc.cpp; sourceTree = "<group>"; };
 		DD3A05871A9EC7B6003AEB27 /* npc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npc.h; sourceTree = "<group>"; };
 		DD3A058A1A9EC7B6003AEB27 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
@@ -68,6 +66,7 @@
 		DD3A059C1A9ECAFC003AEB27 /* tile1.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tile1.bmp; sourceTree = "<group>"; };
 		DD3A059D1A9ECAFC003AEB27 /* tile2.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tile2.bmp; sourceTree = "<group>"; };
 		DD3A059E1A9ECAFC003AEB27 /* tile3.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tile3.bmp; sourceTree = "<group>"; };
+		DD7EF1B21CAC3F7D00DD0766 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		DD8DAA961C0E453100E138BF /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
 		DD8DAA971C0F7C8800E138BF /* Item.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		DD8DAA981C0F7C9500E138BF /* Item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Item.cpp; sourceTree = "<group>"; };
@@ -83,9 +82,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD35BBEA1CA4C0960088210D /* SDL_ttf.framework in Frameworks */,
+				DD7EF1B31CAC3F7D00DD0766 /* SDL2.framework in Frameworks */,
+				DD196BE01CAC387B00EDB55D /* SDL2_ttf.framework in Frameworks */,
 				DD35BBE51CA4B8C40088210D /* liblua.a in Frameworks */,
-				DD3A056E1A9EBEEE003AEB27 /* SDL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,18 +94,16 @@
 		DD3A055A1A9EBE70003AEB27 = {
 			isa = PBXGroup;
 			children = (
-				DD35BBE91CA4C0960088210D /* SDL_ttf.framework */,
-				DD3A056D1A9EBEEE003AEB27 /* SDL.framework */,
+				DD7EF1B21CAC3F7D00DD0766 /* SDL2.framework */,
+				DD196BDF1CAC387B00EDB55D /* SDL2_ttf.framework */,
 				DD3A05651A9EBE70003AEB27 /* openworld */,
 				DD3A05641A9EBE70003AEB27 /* Products */,
 				DD35BBF21CA4C8250088210D /* Arial.ttf */,
 				DD35BBE11CA4B8C40088210D /* lauxlib.h */,
 				DD35BBE21CA4B8C40088210D /* liblua.a */,
-				DD35BBEC1CA4C1F70088210D /* SDL_ttf.h */,
 				DD35BBE31CA4B8C40088210D /* lua.h */,
+				DD21DC5C1CAC2DE600ECE455 /* SDL_ttf.h */,
 				DD35BBE41CA4B8C40088210D /* lualib.h */,
-				DD3A056F1A9EBF03003AEB27 /* SDLMain.h */,
-				DD3A05701A9EBF03003AEB27 /* SDLMain.m */,
 				DD3A05961A9ECAFC003AEB27 /* background.bmp */,
 				DD3A05971A9ECAFC003AEB27 /* bullet.bmp */,
 				DD3A05981A9ECAFC003AEB27 /* enemy1.bmp */,
@@ -150,6 +147,7 @@
 				DD35BBE71CA4C02C0088210D /* LuaPrompt.h */,
 				DD3A058C1A9EC7B6003AEB27 /* Tile.cpp */,
 				DD3A058D1A9EC7B6003AEB27 /* Tile.h */,
+				DD196BD91CAC33B800EDB55D /* Particle.cpp */,
 				DDC2D6641C99A19400D0330B /* Particle.h */,
 				DDC2D6651C99A19400D0330B /* ParticleEngine.h */,
 			);
@@ -213,7 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD8DAA991C0F7C9500E138BF /* Item.cpp in Sources */,
-				DD3A05711A9EBF03003AEB27 /* SDLMain.m in Sources */,
+				DD196BDA1CAC33B800EDB55D /* Particle.cpp in Sources */,
 				DD23334C1CA61DE3001100CC /* main.cpp in Sources */,
 				DD35BBE81CA4C02C0088210D /* LuaPrompt.cpp in Sources */,
 				DD3A05901A9EC7B6003AEB27 /* npc.cpp in Sources */,
@@ -310,6 +308,10 @@
 					/Users/martindionisi/Desktop/sdl/SDL,
 					/Volumes/SDL_ttf,
 					/Volumes/SDL_ttf/SDL_ttf.framework/Versions/A/Frameworks,
+					/Users/martindionisi/Documents,
+					/Users/martindionisi/Desktop/sdl,
+					/Volumes/SDL2_ttf,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -334,6 +336,10 @@
 					/Users/martindionisi/Desktop/sdl/SDL,
 					/Volumes/SDL_ttf,
 					/Volumes/SDL_ttf/SDL_ttf.framework/Versions/A/Frameworks,
+					/Users/martindionisi/Documents,
+					/Users/martindionisi/Desktop/sdl,
+					/Volumes/SDL2_ttf,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

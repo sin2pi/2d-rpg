@@ -1,4 +1,4 @@
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include <iostream>
 #include "Player.h"
 #include "Tile.h"
@@ -21,7 +21,6 @@ SDL_Event event;
 
 bool running = true;
 SDL_Surface *screen,*background;
-SDL_Surface *tiles[5];
 SDL_Rect camera;
 TTF_Font *font;
 
@@ -29,6 +28,9 @@ vector<cNpc*>npc;
 vector<cItem*>items;
 
 lua_State *L;
+
+SDL_Renderer* renderer = NULL;
+SDL_Window* window = NULL;
 
 using namespace std;
 
@@ -39,7 +41,19 @@ int main(int argc,char* argv[])
     
     LuaPrompt prompt;
     prompt.PromptActive = true;
-    screen = SDL_SetVideoMode(640,480,16,SDL_INIT_JOYSTICK|SDL_OPENGLBLIT);
+    
+    window = SDL_CreateWindow
+    (
+     "openworld", SDL_WINDOWPOS_UNDEFINED,
+     SDL_WINDOWPOS_UNDEFINED,
+     640,
+     480,
+     SDL_WINDOW_SHOWN
+     );
+    
+    // Setup renderer
+    
+    renderer =  SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
     
     SDL_Joystick *joystick;
     SDL_JoystickEventState(SDL_ENABLE);
@@ -52,10 +66,17 @@ int main(int argc,char* argv[])
     
     cTile map1;
     map1.LoadMap("/Users/martindionisi/Desktop/openworld/openworld/map.txt");
+    
+    SDL_Surface *tiles[5];
     tiles[0] = SDL_LoadBMP("/Users/martindionisi/Desktop/openworld/openworld/tile1.bmp");
     tiles[1] = SDL_LoadBMP("/Users/martindionisi/Desktop/openworld/openworld/tile2.bmp");
     tiles[2] = SDL_LoadBMP("/Users/martindionisi/Desktop/openworld/openworld/tile3.bmp");
     tiles[3] = NULL;
+    SDL_Texture *ttiles[5];
+    ttiles[0] = SDL_CreateTextureFromSurface(renderer,tiles[0]);
+    ttiles[1] = SDL_CreateTextureFromSurface(renderer,tiles[1]);
+    ttiles[2] = SDL_CreateTextureFromSurface(renderer,tiles[2]);
+    ttiles[3] = SDL_CreateTextureFromSurface(renderer,tiles[3]);
     
     vec2d l1 = {1.5,0};
     vec2d l2 = {0,1.5};
@@ -75,17 +96,19 @@ int main(int argc,char* argv[])
     
     for(int i=0; i < SDL_NumJoysticks(); i++ )
     {
-        printf("    - %s\n", SDL_JoystickName(i));
+        //printf("    - %s\n", SDL_JoystickName(i));
     }
     printf("\n-*-*-*-*-*-*-*-*-*-");
     
     Inventory inv;
     
     int numFrames = 0;
+    Uint32 start;
     Uint32 startTime = SDL_GetTicks();
     while(running)
     {
-        
+        start = SDL_GetTicks();
+        SDL_RenderClear(renderer);
         player.Interact(npc);
         while(SDL_PollEvent(&event))
         {
@@ -105,10 +128,10 @@ int main(int argc,char* argv[])
             npc.at(i)->Interact(npc);
             
         }
-        npc.at(1)->runRandPath();
+        //npc.at(1)->runRandPath();
         player.Move();
         camera = player.SetCamera(camera);
-        map1.RenderLayer(tiles,0);
+        map1.RenderLayer(ttiles,0);
         for(int i = 0;i<npc.size();i++)
         {
             npc.at(i)->Render();
@@ -119,18 +142,23 @@ int main(int argc,char* argv[])
         }
         player.Render(camera);
         par.SetPos(player.getBox()->x-camera.x,player.getBox()->y-camera.y);
-        //par.Run();
+        par.Run();
         par.Render();
-        map1.RenderLayer(tiles,1);
-        inv.Render();
+        map1.RenderLayer(ttiles,1);
+        //inv.Render();
         
         prompt.update(screen);
         
         numFrames++;
-        int fps = (numFrames/(float)(SDL_GetTicks() - startTime) )*1000;
-        cout << "fps: " << fps;
-        SDL_GL_SwapBuffers();
-        SDL_Flip(screen);
+        //int fps = (numFrames/(float)(SDL_GetTicks() - startTime) )*1000;
+        //cout << "fps: " << fps;
+        //SDL_GL_SwapBuffers();
+        
+        SDL_RenderPresent(renderer);
+        if (1000/60>SDL_GetTicks()-start)
+        {
+            SDL_Delay(1000/60-(SDL_GetTicks()-start));
+        }
     }
 
     SDL_Quit();

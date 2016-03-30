@@ -1,2 +1,2 @@
-50 150 20 40 1 1 30 100 /Users/martindionisi/Desktop/openworld/openworld/Luigi.bmp 3
-150 150 20 40 1 1 30 100 /Users/martindionisi/Desktop/openworld/openworld/Luigi.bmp 3
+50 150 20 40 1 1 30 10 /Users/martindionisi/Desktop/openworld/openworld/Luigi.bmp 3
+150 150 20 40 1 1 30 10 /Users/martindionisi/Desktop/openworld/openworld/Luigi.bmp 3
