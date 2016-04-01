@@ -10,7 +10,7 @@
 #define openworld_luaCalls_h
 
 #include "npc.h"
-#include "Item.h"
+#include "item.h"
 
 extern "C" {
 #include "lua.h"
@@ -19,7 +19,13 @@ extern "C" {
 }
 
 extern vector<cNpc*>npc;
-extern vector<cItem*>item;
+extern vector<cItem*>items;
+
+int itemVel(lua_State *L){
+    
+    items.at(lua_tonumber(L,-lua_gettop(L)))->setVel(lua_tonumber(L,-lua_gettop(L)+1), lua_tonumber(L,-lua_gettop(L)+2));
+    return 0;
+}
 
 int setNpc(lua_State *L){ // int x int y int spd
     
@@ -34,11 +40,11 @@ int setNpc(lua_State *L){ // int x int y int spd
     
     string file;
   
-    if(lua_isnumber(L,-arg+3)){
+   // if(lua_isnumber(L,-arg+3)){
         file = "/Users/martindionisi/Desktop/openworld/openworld/Luigi.bmp";
         hp = lua_tonumber(L,-arg+3);
         nx = 3;
-    }
+    //}
     const char *f = file.c_str();
     npc.push_back(new cNpc(x,y,20,40,xs,ys,20,20,hp,f,nx));
     
@@ -81,6 +87,11 @@ int npcstop(lua_State *L){
     return 0;
 }
 
+int deleteNpc(lua_State *L){
+    npc.erase(npc.begin() + lua_tonumber(L,-lua_gettop(L))+1);
+    return 0;
+}
+
 int setNpcRandPath(lua_State *L){
     int ix = lua_tonumber(L,-lua_gettop(L)+1);
     int iy = lua_tonumber(L,-lua_gettop(L)+2);
@@ -92,8 +103,14 @@ int setNpcRandPath(lua_State *L){
     return 1;
 }
 
+int runScript(lua_State *L){
+    luaL_dofile(L,lua_tostring(L,-lua_gettop(L)));
+    return 0;
+}
+
 void RegisterCalls(lua_State *L)
 {
+    lua_register(L,"itemVel",itemVel);
     lua_register(L,"setNpc",setNpc);
     lua_register(L,"npcPos",setNpcPos);
     lua_register(L,"npcSpeed",setNpcSpeed);
@@ -101,7 +118,9 @@ void RegisterCalls(lua_State *L)
     lua_register(L,"npcStart",npcstart);
     lua_register(L,"npcStop",npcstop);
     lua_register(L,"npcPath",setNpcPath);
+    lua_register(L,"delNpc",deleteNpc);
     lua_register(L,"npcRandPath",setNpcRandPath);
+    lua_register(L,"loadScrip", runScript);
 }
 
 

@@ -7,8 +7,8 @@ cPlayer::cPlayer(float x,float y,int w,int h,float xspeed,float yspeed,float acc
     image = SDL_LoadBMP(file);
     box.x = x;
     box.y = y;
-    box.w = w;
-    box.h = h;
+    box.w = w+5;
+    box.h = h+10;
     xSpeed = xspeed;
     ySpeed = yspeed;
     acceleration = acc;
@@ -18,7 +18,7 @@ cPlayer::cPlayer(float x,float y,int w,int h,float xspeed,float yspeed,float acc
     idle.push_back(new Animation(0,0,w,h,1,10));
     rect = {0,static_cast<Sint16>(h),static_cast<Uint16>(w),static_cast<Uint16>(h)};
     idle.push_back(new Animation(w*2,h,w,h,1,10));
-    //SDL_SetColorKey(image,SDL_SRCCOLORKEY,SDL_MapRGB(image->format,0,255,255));
+    SDL_SetColorKey(image,SDL_TRUE,SDL_MapRGB(image->format,0,255,255));
     txt = SDL_CreateTextureFromSurface(SDL_GetRenderer(SDL_GetWindowFromID(1)), image);
     idleframe = 0;
 }
@@ -37,11 +37,29 @@ void cPlayer::Interact(vector<cNpc *> n)
     }
 }
 
-void cPlayer::HandleInput(SDL_Event event)
+void cPlayer::Interact(vector<cItem *> n)
+{
+    if(grabing)
+    {
+        for(int i=0;i<n.size();i++)
+        {
+            if(Physics::collision(&box,n.at(i)->getRect())){
+                count ++;
+                int x = (box.x+box.w/2)-(n.at(i)->getRect()->w/2);
+                int y = box.y-n.at(i)->getRect()->h/2;
+                n.at(i)->setPos(x,y);
+                n.at(i)->setVel(xVel,yVel);
+            }
+        }
+    }
+
+}
+
+void cPlayer::HandleInput(SDL_Event event,vector<cItem*>n,Inventory *inv)
 {
     switch(event.type){
         case SDL_QUIT:
-            SDL_Quit();
+            running = false;
             break;
         case SDL_JOYAXISMOTION:  /* Handle Joystick Motion */
             //cout << event.jaxis.value << endl;
@@ -84,9 +102,16 @@ void cPlayer::HandleInput(SDL_Event event)
             
             break;
         case SDL_JOYBUTTONDOWN:  /* Handle Joystick Button Presses */
-            if ( event.jbutton.button == 4 )
+            if ( event.jbutton.button == 1 )
             {
-                
+                for(int i = 0;i < n.size();i++){
+                    if(Physics::collision(&box,n.at(i)->getRect())&& !n.at(i)->grabed)
+                    {
+                        //int x = n.at(<#size_type __n#>)
+                        inv->AddItem(new cItem(box.x,box.y,box.w,box.h,0,n.at(i)->filename,n.at(i)->getId()));
+                        n.at(i)->grabed = true;
+                    }
+                }
             }
             if ( event.jbutton.button == 5 )
             {
@@ -94,7 +119,13 @@ void cPlayer::HandleInput(SDL_Event event)
             }
             if ( event.jbutton.button == 2 )
             {
-                break;
+                grabing = true;
+            }
+            break;
+        case SDL_JOYBUTTONUP:
+            if ( event.jbutton.button == 2 )
+            {
+                grabing = false;
             }
             break;
 
@@ -117,6 +148,19 @@ void cPlayer::HandleInput(SDL_Event event)
              case SDLK_ESCAPE:
                 running = false;
                 break;
+            case SDLK_g:
+                for(int i = 0;i < n.size();i++){
+                    if(Physics::collision(&box,n.at(i)->getRect())&& !n.at(i)->grabed)
+                    {
+                        //int x = n.at(<#size_type __n#>)
+                        inv->AddItem(new cItem(box.x,box.y,box.w,box.h,0,n.at(i)->filename,n.at(i)->getId()));
+                        n.at(i)->grabed = true;
+                    }
+                }
+                break;
+            case SDLK_m:
+                grabing = true;
+                break;
                 
         }break;
         case SDL_KEYUP:
@@ -136,6 +180,9 @@ void cPlayer::HandleInput(SDL_Event event)
             case SDLK_RIGHT:
                 dir[3] = 0;
                 idleframe = 0;
+                break;
+            case SDLK_m:
+                grabing = false;
                 break;
         }break;
     }

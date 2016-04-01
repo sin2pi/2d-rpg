@@ -2,7 +2,9 @@
 #define LUAPROMPT_H
 #include <SDL2/SDL.h>
 #include <string>
-#include <SDL_ttf/SDL_ttf.h>
+#include <iostream>
+#include <SDL2_ttf/SDL_ttf.h>
+
 extern "C"
 {
 #include "lauxlib.h"
@@ -14,6 +16,8 @@ public:
     //Constructor & Deconstructor
     LuaPrompt();
     ~LuaPrompt();
+    int c = 1;
+    SDL_Texture *txt;
 
     TTF_Font *font2;
     SDL_Color green = {0,200,0};

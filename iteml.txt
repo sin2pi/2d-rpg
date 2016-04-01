@@ -3,4 +3,4 @@
 200 140 32 32 /Users/martindionisi/Desktop/openworld/openworld/bullet.bmp 2
 10 100 32 32 /Users/martindionisi/Desktop/openworld/openworld/tile2.bmp 3
 100 300 32 32 /Users/martindionisi/Desktop/openworld/openworld/tile3.bmp 4
-400 10 32 32 /Users/martindionisi/Desktop/openworld/openworld/bullet.bmp 5
+170 10 32 32 /Users/martindionisi/Desktop/openworld/openworld/bullet.bmp 5

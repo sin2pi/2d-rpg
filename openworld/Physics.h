@@ -10,10 +10,27 @@
 #define openworld_Physics_h
 #include <SDL2/SDL.h>
 #include <math.h>
+#include <iostream>
+#include "item.h"
+
+//class cItem;
+
+using namespace std;
 
 class Physics{
     
 public:
+    
+    static void elasticCollision(float &v1,float m1,float &v2,float m2)
+    {
+        float ve1 = v1;
+        float ve2 = v2;
+        float dm = m1-m2;
+        float sm = m1+m2;
+        v1 = ((dm/sm)*ve1)+(((2*m2)/sm)*ve2);
+        v2 = (((2*m2)/sm)*ve1)-((dm/sm)*ve2);
+        
+    }
     
     static bool circlecol(SDL_Rect *rect1,int x,int y,int r)
     {

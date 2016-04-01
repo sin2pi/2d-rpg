@@ -1,4 +1,3 @@
-//
 //  Item.cpp
 //  openworld
 //
@@ -10,12 +9,13 @@
 
 extern SDL_Rect camera;
 
-cItem::cItem(int xpos,int ypos,int w,int h,string file,int index)
+cItem::cItem(int xpos,int ypos,int w,int h,float vel,string file,int index)
 {
     box.x = xpos;
     box.y = ypos;
     box.w = w;
     box.h = h;
+    xvel = yvel = vel;
     filename = file;
     const char *f =file.c_str();
     grabed = false;
@@ -24,36 +24,59 @@ cItem::cItem(int xpos,int ypos,int w,int h,string file,int index)
     id = index;
 }
 
-void cItem::Interact(SDL_Event event,cPlayer player,Inventory *inv)
+
+void cItem::Interact(vector<cItem*> items)
 {
-    if(event.type == SDL_QUIT)
-        SDL_Quit();
-    if(event.type == SDL_KEYDOWN){
-        
-        if(event.key.keysym.sym == SDLK_g)
-        {
-            if(Physics::collision(&box,player.getBox())&& grabed == false)
-            {
-                inv->AddItem(new cItem(box.x,box.y,box.w,box.h,filename,id));
-                grabed = true;
-            }
-        }
-        
-    }
-    if(event.type == SDL_JOYBUTTONDOWN)
+    for(int i = 0;i<items.size();i++)
     {
-        if(event.jbutton.button == 1)
+        if(box.x == items.at(i)->box.x && box.y == items.at(i)->box.y)
         {
-            if(Physics::collision(&box,player.getBox())&& grabed == false)
-            {
-                inv->AddItem(new cItem(box.x,box.y,box.w,box.h,filename,id));
-                grabed = true;
+            continue;
+        }
+        else if(Physics::collision(&box,items.at(i)->getRect()))
+        {
+            if(xvel != 0){
+                Physics::elasticCollision(xvel,20,items.at(i)->xvel,20);
+                box.x += xvel;
+                items.at(i)->box.x += items.at(i)->xvel;
+            }
+            if(yvel != 0){
+                Physics::elasticCollision(yvel,20,items.at(i)->yvel,20);
+                box.y += yvel;
+                items.at(i)->box.y += items.at(i)->yvel;
             }
         }
     }
-    if(event.type == SDL_KEYUP){
-        
+    
+    if(xvel > 0){
+        //int xs = xvel;
+        xvel -= 0.1;
+        if(xvel <= 0)
+            xvel = 0;
+        box.x += xvel;
     }
+    if(xvel < 0){
+        //int xs = xvel;
+        xvel += 0.1;
+        if(xvel >= 0)
+            xvel = 0;
+        box.x += xvel;
+    }
+    if(yvel > 0){
+        //int ys = yvel;
+        yvel -= 0.1;
+        if(yvel <= 0)
+            yvel = 0;
+        box.y += yvel;
+    }
+    if(yvel < 0){
+        //int xs = xvel;
+        yvel += 0.1;
+        if(yvel >= 0)
+            yvel = 0;
+        box.y += yvel;
+    }
+
 }
 
 void cItem::Render()

@@ -9,25 +9,27 @@ cNpc::cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,in
 {
     box.x = x;
     box.y = y;
-    box.w = w;
-    box.h = h;
+    box.w = w+5;
+    box.h = h+10;
     xVel = xvel;
     yVel = yvel;
     xSpeed = xVel;
     ySpeed = yVel;
     ranim = new Animation(0,0,w,h,nx,10);
     lanim = new Animation(0,h,w,h,nx,10);
-    idle[0] = new Animation(0,0,w,h,1,10);
-    idle[1] = new Animation(0,h,w,h,1,10);
+    idle.push_back(new Animation(0,0,w,h,1,10));
+    idle.push_back(new Animation(0,h,w,h,1,10));
     //idle = new Animation()
+    idleframe=0;
     moving = false;
+    rmoving = false;
     Hp = hp;
     Power = power;
     rep = rp;
     //setSquarePath(150, 100);
     image = SDL_LoadBMP(file);
+    SDL_SetColorKey(image,SDL_TRUE,SDL_MapRGB(image->format,0,255,255));
     txt = SDL_CreateTextureFromSurface(SDL_GetRenderer(SDL_GetWindowFromID(1)),image);
-    //SDL_SetColorKey(image,SDL_SRCCOLORKEY,SDL_MapRGB(image->format,0,255,255));
 }
 
 int Rand(int min, int max)
@@ -128,6 +130,10 @@ void cNpc::runRandPath()
         Move(x,box.y);
         //movNum ++;
         if(isonTarget(x,box.y)){
+            side[0] = 0;
+            side[1] = 0;
+            side[2] = 0;
+            side[3] = 0;
             ontarget = true;
             timer = SDL_GetTicks();
         }
@@ -143,6 +149,10 @@ void cNpc::runRandPath()
     if(!ontarget && !isodd(movNum)){
         Move(box.x,y);
         if(isonTarget(box.x,y)){
+            side[0] = 0;
+            side[1] = 0;
+            side[2] = 0;
+            side[3] = 0;
             ontarget = true;
             timer = SDL_GetTicks();
         }
@@ -354,9 +364,9 @@ void cNpc::Render()
         {
             ranim->RunAnimation(rect,txt);
         }
-        else
+        else if(!side[0]&&!side[1]&&!side[2]&&!side[3])
         {
-            idle[idleframe]->RunAnimation(rect,txt);
+            idle.at(idleframe)->RenderFrame(rect,txt);
         }
         
     }

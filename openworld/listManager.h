@@ -40,7 +40,7 @@ void LoadItemList(vector<cItem*>*list,const char *file)
     {
         openfile >> x >> y >> w >> h >> f >> id;
         c = f.c_str();
-        list->push_back(new cItem(x,y,w,h,c,id));
+        list->push_back(new cItem(x,y,w,h,0,c,id));
     }
 }
 

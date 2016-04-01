@@ -23,19 +23,25 @@ private:
     SDL_Rect box;
     SDL_Surface *image;
     SDL_Texture *txt;
-    bool used,dropped;
+    bool used,dropped,moved;
     int state;
-    string filename;
+    float vel;
+    float xvel,yvel;
     int id;
     
 public:
     bool grabed;
-    cItem(int xpos,int ypos,int w,int h,string file,int index);
+    string filename;
+    cItem(int xpos,int ypos,int w,int h,float vel,string file,int index);
     void Render();
-    void Interact(SDL_Event event,cPlayer player,Inventory *inv);
+    //void Interact(SDL_Event event,cPlayer player,Inventory *inv);
+    void Interact(vector<cItem*>items);
     SDL_Rect getPos(){ return box;};
+    SDL_Rect *getRect(){ return &box;};
+    float &getVel(int a){if(a==1)return xvel;else return yvel;}
     int getState(){ return state;};
     void setPos(int x,int y){box = {static_cast<Sint16>(x),static_cast<Sint16>(y),box.w,box.h};};
+    void setVel(float xv,float yv){xvel = xv;yvel = yv;}
     SDL_Texture *getImage(){return txt;};
     int getId(){return id;};
 };

@@ -36,7 +36,6 @@
 /* Begin PBXFileReference section */
 		DD196BD91CAC33B800EDB55D /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
 		DD196BDF1CAC387B00EDB55D /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
-		DD21DC5C1CAC2DE600ECE455 /* SDL_ttf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_ttf.h; path = ../../../../../Volumes/SDL2_ttf/SDL2_ttf.framework/Versions/A/Headers/SDL_ttf.h; sourceTree = "<group>"; };
 		DD23334B1CA61DE3001100CC /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DD2415231C24FFE5009C2322 /* Animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animation.cpp; sourceTree = "<group>"; };
 		DD2415241C24FFE5009C2322 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
@@ -66,6 +65,7 @@
 		DD3A059C1A9ECAFC003AEB27 /* tile1.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tile1.bmp; sourceTree = "<group>"; };
 		DD3A059D1A9ECAFC003AEB27 /* tile2.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tile2.bmp; sourceTree = "<group>"; };
 		DD3A059E1A9ECAFC003AEB27 /* tile3.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tile3.bmp; sourceTree = "<group>"; };
+		DD7A7C021CAC6CE6007F06D6 /* SDL_ttf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_ttf.h; path = ../../../../../Library/Frameworks/SDL2_ttf.framework/Versions/A/Headers/SDL_ttf.h; sourceTree = "<group>"; };
 		DD7EF1B21CAC3F7D00DD0766 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		DD8DAA961C0E453100E138BF /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
 		DD8DAA971C0F7C8800E138BF /* Item.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
@@ -99,10 +99,10 @@
 				DD3A05651A9EBE70003AEB27 /* openworld */,
 				DD3A05641A9EBE70003AEB27 /* Products */,
 				DD35BBF21CA4C8250088210D /* Arial.ttf */,
+				DD7A7C021CAC6CE6007F06D6 /* SDL_ttf.h */,
 				DD35BBE11CA4B8C40088210D /* lauxlib.h */,
 				DD35BBE21CA4B8C40088210D /* liblua.a */,
 				DD35BBE31CA4B8C40088210D /* lua.h */,
-				DD21DC5C1CAC2DE600ECE455 /* SDL_ttf.h */,
 				DD35BBE41CA4B8C40088210D /* lualib.h */,
 				DD3A05961A9ECAFC003AEB27 /* background.bmp */,
 				DD3A05971A9ECAFC003AEB27 /* bullet.bmp */,

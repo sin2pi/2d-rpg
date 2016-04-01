@@ -43,12 +43,8 @@ int main(int argc,char* argv[])
     prompt.PromptActive = true;
     
     window = SDL_CreateWindow
-    (
-     "openworld", SDL_WINDOWPOS_UNDEFINED,
-     SDL_WINDOWPOS_UNDEFINED,
-     640,
-     480,
-     SDL_WINDOW_SHOWN
+    ("openworld", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,640,480,
+     SDL_WINDOW_RESIZABLE
      );
     
     // Setup renderer
@@ -89,6 +85,7 @@ int main(int argc,char* argv[])
     LoadNpcList(&npc,"/Users/martindionisi/Desktop/openworld/openworld/npcl.txt");
     LoadItemList(&items,"/Users/martindionisi/Desktop/openworld/openworld/iteml.txt");
     
+    //items.at(5)->setVel(-5,0);
     npc.at(1)->setRandPath(npc.at(1)->getBox()->x, npc.at(1)->getBox()->y,200, 200, 5);
     
     printf("%i joysticks were found.\n\n", SDL_NumJoysticks() );
@@ -110,14 +107,15 @@ int main(int argc,char* argv[])
         start = SDL_GetTicks();
         SDL_RenderClear(renderer);
         player.Interact(npc);
+        player.Interact(items);
         while(SDL_PollEvent(&event))
         {
             for(int i = 0;i< items.size();i++)
             {
-                items.at(i)->Interact(event,player,&inv);
+                //items.at(i)->Interact(event,player,&inv);
             }
             inv.HandleInput(event,player,items);
-            player.HandleInput(event);
+            player.HandleInput(event,items,&inv);
             prompt.handle_input();
         }
         
@@ -132,20 +130,21 @@ int main(int argc,char* argv[])
         player.Move();
         camera = player.SetCamera(camera);
         map1.RenderLayer(ttiles,0);
+        for(int j = 0;j<items.size();j++)
+        {
+            items.at(j)->Interact(items);
+            items.at(j)->Render();
+        }
         for(int i = 0;i<npc.size();i++)
         {
             npc.at(i)->Render();
         }
-        for(int j = 0;j<items.size();j++)
-        {
-            items.at(j)->Render();
-        }
         player.Render(camera);
         par.SetPos(player.getBox()->x-camera.x,player.getBox()->y-camera.y);
-        par.Run();
-        par.Render();
+        //par.Run();
+        //par.Render();
         map1.RenderLayer(ttiles,1);
-        //inv.Render();
+        inv.Render();
         
         prompt.update(screen);
         

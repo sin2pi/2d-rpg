@@ -35,7 +35,7 @@ class cNpc
     int nx;
     Animation *ranim;
     Animation *lanim;
-    Animation *idle[2];
+    vector <Animation*>idle;
     int idleframe;
     vec2d vrt[4];
     bool ontarget = false;

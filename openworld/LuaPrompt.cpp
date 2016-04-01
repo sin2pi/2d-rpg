@@ -20,7 +20,6 @@ LuaPrompt::~LuaPrompt()
 //Lua Prompt Update Text/Render Function
 void LuaPrompt::update(SDL_Surface* screen)
 {
-
     if(PromptActive == true)
     {
         if(Prompt != NULL)
@@ -28,10 +27,11 @@ void LuaPrompt::update(SDL_Surface* screen)
             SDL_Rect rect;
             rect.x = 10;
             rect.y = 300;
-            rect.w =100;
-            rect.h = 100;
-            SDL_Texture *txt = SDL_CreateTextureFromSurface(SDL_GetRenderer(SDL_GetWindowFromID(NULL)),Prompt);
-            SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindowFromID(NULL)), txt, NULL,&rect);
+            SDL_QueryTexture(txt, NULL, NULL, &rect.w, &rect.h);
+            
+            //rect.h = 30;
+            
+            SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindowFromID(1)), txt, NULL,&rect);
         }
 
     }
@@ -39,61 +39,76 @@ void LuaPrompt::update(SDL_Surface* screen)
 }
 void LuaPrompt::handle_input()
 {
+    if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_TAB){
+        if(PromptActive)
+            PromptActive = false;
+        else
+            PromptActive = true;
+    }
     //SDL_Enable( SDL_ENABLE );
-    if (event.type == SDL_KEYDOWN)
-    {
-        if(event.key.keysym.mod == 0x09){
-            if(PromptActive)
-                PromptActive = false;
-            else
-                PromptActive = true;
-        }
-
-        if( event.key.keysym.mod == (Uint16)' ' )
+    if(PromptActive){
+        if (event.type == SDL_KEYDOWN)
         {
-            str += (char)event.key.keysym.mod;
-        }
-        else if( ( event.key.keysym.mod >= (Uint16)'0' ) && ( event.key.keysym.mod <= (Uint16)'9' ) )
-        {
-            str += (char)event.key.keysym.mod;
-        }
-        else if( ( event.key.keysym.mod >= (Uint16)'A' ) && ( event.key.keysym.mod <= (Uint16)'Z' ) )
-        {
-            str += (char)event.key.keysym.mod;
-        }
-        else if( ( event.key.keysym.mod >= (Uint16)'a' ) && ( event.key.keysym.mod <= (Uint16)'z' ) )
-        {
-            str += (char)event.key.keysym.mod;
-        }
-        else if( event.key.keysym.mod == 0x0028 || event.key.keysym.mod == 0x0029 || event.key.keysym.mod == 0x002C || event.key.keysym.mod == 0x0022 || event.key.keysym.mod == 0x002F || event.key.keysym.mod == 0x002B || event.key.keysym.mod == 0x002D || event.key.keysym.mod == 0x002E || event.key.keysym.mod == 0x003D || event.key.keysym.mod == 0x003A)
-        {
-            str += (char)event.key.keysym.mod;
-        }
-        
-
-        if( ( event.key.keysym.sym == SDLK_BACKSPACE ) && ( str.length() != 0 ) )
-        {
-            str.erase(str.length()-1);
-        }
-
-        if ( event.key.keysym.sym == SDLK_RETURN)
-        {
-            int ret = luaL_dostring(L,str.c_str());
-            if(ret != 0)
+            if( event.key.keysym.sym == (Uint16)' ' )
             {
-                const char *out = lua_tostring(L,-1);
-                lua_pop(L,1);
+                str += (char)event.key.keysym.sym;
             }
-            str = "";
-        }
-        if(event.key.keysym.sym == SDLK_LSHIFT){
-            str += "\n";
+            else if( ( event.key.keysym.sym >= (Uint16)'0' ) && ( event.key.keysym.sym <= (Uint16)'9' ) )
+            {
+                if(!SDL_GetModState() & KMOD_SHIFT)
+                    str += (char)event.key.keysym.sym;
+            }
+            
+            else if( event.key.keysym.sym == 0x0028 || event.key.keysym.sym == 0x0029 || event.key.keysym.sym == 0x002C || event.key.keysym.sym == 0x0022 || event.key.keysym.sym == 0x002F || event.key.keysym.sym == 0x002B || event.key.keysym.sym == 0x002D || event.key.keysym.sym == 0x002E || event.key.keysym.sym == 0x003D || event.key.keysym.sym == 0x003A)
+            {
+                if(!SDL_GetModState() & KMOD_SHIFT)
+                    str += (char)event.key.keysym.sym;
+            }
+            else if( ( event.key.keysym.sym >= (Uint16)'a' ) && ( event.key.keysym.sym <= (Uint16)'z' ) )
+            {
+                if(!SDL_GetModState() & KMOD_SHIFT)
+                    str += (char)event.key.keysym.sym;
+                // else
+                
+            }
+            
+            
+            if( ( event.key.keysym.sym == SDLK_BACKSPACE ) && ( str.length() != 0 ) )
+            {
+                str.erase(str.length()-1);
+            }
+            
+            if ( event.key.keysym.sym == SDLK_RETURN)
+            {
+                int ret = luaL_dostring(L,str.c_str());
+                if(ret != 0)
+                {
+                    const char *out = lua_tostring(L,-1);
+                    std::cout << out << std::endl;
+                    lua_pop(L,1);
+                }
+                str = "";
+            }
+            if(event.key.keysym.sym == SDLK_LSHIFT){
+                str += "\n";
+                
+            }
+            
+            
+            Prompt = TTF_RenderText_Blended_Wrapped(font2,str.c_str(),{0,0,0},600);
+            txt = SDL_CreateTextureFromSurface(SDL_GetRenderer(SDL_GetWindowFromID(1)),Prompt);
+            
+            
             
         }
-        
-        Prompt = TTF_RenderText_Shaded(font2,str.c_str(),green, {0,0,0});
-        
-        
-
+        if( event.type == SDL_TEXTINPUT )
+        {
+            if(SDL_GetModState() && KMOD_CAPS)
+                str += event.text.text;
+            
+            Prompt = TTF_RenderText_Blended_Wrapped(font2,str.c_str(),{0,0,0},200);
+            txt = SDL_CreateTextureFromSurface(SDL_GetRenderer(SDL_GetWindowFromID(1)),Prompt);
+            
+        }
     }
 }
