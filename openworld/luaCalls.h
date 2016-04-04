@@ -27,6 +27,31 @@ int itemVel(lua_State *L){
     return 0;
 }
 
+int itemPos(lua_State *L){
+    int arg = -lua_gettop(L);
+    items.at(lua_tonumber(L,arg))->setPos(arg+1,arg+2);
+    return 0;
+}
+
+int setItem(lua_State *L){
+    int arg = -lua_gettop(L);
+    int x = lua_tonumber(L,arg);
+    int y = lua_tonumber(L,arg+1);
+    int w = lua_tonumber(L,arg+2);
+    int h = lua_tonumber(L,arg+3);
+    string f = lua_tostring(L,arg+4);
+    string s = lua_tostring(L,arg+5);;
+    int id = lua_tonumber(L, arg+6);
+    items.push_back(new cItem(x,y,w,h,0,f,s,id));
+    return 0;
+}
+
+int deleteItem(lua_State *L){
+    
+    items.erase(items.begin()+lua_tonumber(L,-lua_gettop(L)));
+    return 0;
+}
+
 int setNpc(lua_State *L){ // int x int y int spd
     
     int arg = lua_gettop(L);
@@ -111,6 +136,9 @@ int runScript(lua_State *L){
 void RegisterCalls(lua_State *L)
 {
     lua_register(L,"itemVel",itemVel);
+    lua_register(L,"itemPos",itemPos);
+    lua_register(L,"setItem",setItem);
+    lua_register(L,"deleteItem",deleteItem);
     lua_register(L,"setNpc",setNpc);
     lua_register(L,"npcPos",setNpcPos);
     lua_register(L,"npcSpeed",setNpcSpeed);
@@ -120,7 +148,7 @@ void RegisterCalls(lua_State *L)
     lua_register(L,"npcPath",setNpcPath);
     lua_register(L,"delNpc",deleteNpc);
     lua_register(L,"npcRandPath",setNpcRandPath);
-    lua_register(L,"loadScrip", runScript);
+    lua_register(L,"loadScript", runScript);
 }
 
 

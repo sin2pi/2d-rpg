@@ -27,14 +27,16 @@ private:
     int state;
     float vel;
     float xvel,yvel;
+    string sf;
     int id;
+    string filename;
     
 public:
     bool grabed;
-    string filename;
-    cItem(int xpos,int ypos,int w,int h,float vel,string file,int index);
+    string getScript(){return sf;}
+    string getImgFile(){return filename;}
+    cItem(int xpos,int ypos,int w,int h,float vel,string file,string script,int index);
     void Render();
-    //void Interact(SDL_Event event,cPlayer player,Inventory *inv);
     void Interact(vector<cItem*>items);
     SDL_Rect getPos(){ return box;};
     SDL_Rect *getRect(){ return &box;};

@@ -61,12 +61,12 @@ int main(int argc,char* argv[])
     RegisterCalls(L);
     
     cTile map1;
-    map1.LoadMap("/Users/martindionisi/Desktop/openworld/openworld/map.txt");
+    map1.LoadMap("map.txt");
     
     SDL_Surface *tiles[5];
-    tiles[0] = SDL_LoadBMP("/Users/martindionisi/Desktop/openworld/openworld/tile1.bmp");
-    tiles[1] = SDL_LoadBMP("/Users/martindionisi/Desktop/openworld/openworld/tile2.bmp");
-    tiles[2] = SDL_LoadBMP("/Users/martindionisi/Desktop/openworld/openworld/tile3.bmp");
+    tiles[0] = SDL_LoadBMP("tile1.bmp");
+    tiles[1] = SDL_LoadBMP("tile2.bmp");
+    tiles[2] = SDL_LoadBMP("tile3.bmp");
     tiles[3] = NULL;
     SDL_Texture *ttiles[5];
     ttiles[0] = SDL_CreateTextureFromSurface(renderer,tiles[0]);
@@ -80,10 +80,10 @@ int main(int argc,char* argv[])
     
     ParticleEngine par(4000,l1,l2,pos);
     
-    cPlayer player(0,100,20,40,2,2,2,"/Users/martindionisi/Desktop/openworld/openworld/mario.bmp",3);
+    cPlayer player(0,100,20,40,2,2,2,"mario.bmp",3);
     
-    LoadNpcList(&npc,"/Users/martindionisi/Desktop/openworld/openworld/npcl.txt");
-    LoadItemList(&items,"/Users/martindionisi/Desktop/openworld/openworld/iteml.txt");
+    LoadNpcList(&npc,"npcl.txt");
+    LoadItemList(&items,"iteml.txt");
     
     //items.at(5)->setVel(-5,0);
     npc.at(1)->setRandPath(npc.at(1)->getBox()->x, npc.at(1)->getBox()->y,200, 200, 5);

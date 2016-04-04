@@ -34,13 +34,14 @@ void LoadItemList(vector<cItem*>*list,const char *file)
 {
     ifstream openfile(file);
     float x,y,w,h,id;
-    string f;
-    const char *c;
+    string f,s;
+    const char *c,*d;
     while(!openfile.eof())
     {
-        openfile >> x >> y >> w >> h >> f >> id;
+        openfile >> x >> y >> w >> h >> f >> s >> id;
         c = f.c_str();
-        list->push_back(new cItem(x,y,w,h,0,c,id));
+        d = s.c_str();
+        list->push_back(new cItem(x,y,w,h,0,c,d,id));
     }
 }
 

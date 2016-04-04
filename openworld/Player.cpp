@@ -108,7 +108,7 @@ void cPlayer::HandleInput(SDL_Event event,vector<cItem*>n,Inventory *inv)
                     if(Physics::collision(&box,n.at(i)->getRect())&& !n.at(i)->grabed)
                     {
                         //int x = n.at(<#size_type __n#>)
-                        inv->AddItem(new cItem(box.x,box.y,box.w,box.h,0,n.at(i)->filename,n.at(i)->getId()));
+                        inv->AddItem(new cItem(box.x,box.y,box.w,box.h,0,n.at(i)->getImgFile(),n.at(i)->getScript(),n.at(i)->getId()));
                         n.at(i)->grabed = true;
                     }
                 }
@@ -153,7 +153,7 @@ void cPlayer::HandleInput(SDL_Event event,vector<cItem*>n,Inventory *inv)
                     if(Physics::collision(&box,n.at(i)->getRect())&& !n.at(i)->grabed)
                     {
                         //int x = n.at(<#size_type __n#>)
-                        inv->AddItem(new cItem(box.x,box.y,box.w,box.h,0,n.at(i)->filename,n.at(i)->getId()));
+                        inv->AddItem(new cItem(box.x,box.y,box.w,box.h,0,n.at(i)->getImgFile(),n.at(i)->getScript(),n.at(i)->getId()));
                         n.at(i)->grabed = true;
                     }
                 }

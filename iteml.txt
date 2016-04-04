@@ -1,6 +1,6 @@
-10 10 32 32 /Users/martindionisi/Desktop/openworld/openworld/bullet.bmp 0
-500 700 32 32 /Users/martindionisi/Desktop/openworld/openworld/tile3.bmp 1
-200 140 32 32 /Users/martindionisi/Desktop/openworld/openworld/bullet.bmp 2
-10 100 32 32 /Users/martindionisi/Desktop/openworld/openworld/tile2.bmp 3
-100 300 32 32 /Users/martindionisi/Desktop/openworld/openworld/tile3.bmp 4
-170 10 32 32 /Users/martindionisi/Desktop/openworld/openworld/bullet.bmp 5
+10 10 32 32 bullet.bmp g 0
+500 700 32 32 tile3.bmp g 1
+200 140 32 32 bullet.bmp g 2
+10 100 32 32 tile2.bmp g 3
+100 300 32 32 tile3.bmp g 4
+170 10 32 32 bullet.bmp g 5

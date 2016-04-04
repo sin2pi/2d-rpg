@@ -51,7 +51,5 @@ void Animation::RunAnimation(SDL_Rect pos, SDL_Texture *txt)
     SDL_Point center = {8, 8}; // the center where the texture will be rotated.
     SDL_RendererFlip flip = SDL_FLIP_NONE; // the flip of the texture.
     
-    // now, try to draw something
-    //int result = SDL_RenderCopyEx(renderer, texture, &crop , &rect, angle, &center, flip);
     SDL_RenderCopyEx(SDL_GetRenderer(SDL_GetWindowFromID(1)), txt, &clip[frame],&pos,angle,&center,flip);
 }
