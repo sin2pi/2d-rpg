@@ -37,7 +37,7 @@ void LuaPrompt::update(SDL_Surface* screen)
     }
 
 }
-void LuaPrompt::handle_input()
+void LuaPrompt::HandleInput()
 {
     if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_TAB){
         if(PromptActive)

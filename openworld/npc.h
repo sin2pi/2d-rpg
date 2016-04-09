@@ -17,7 +17,7 @@ class cNpc
     
     SDL_Surface *image;
     SDL_Texture *txt;
-    float xVel,yVel,ySpeed,xSpeed;
+   
     SDL_Rect box;
     int side[4];
     float Power,Hp;
@@ -44,10 +44,10 @@ class cNpc
     Uint32 timer;
  
     public:
-    
+     float xVel,yVel,ySpeed,xSpeed;
     cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,int rp,const char*file,int nx);
     SDL_Rect *getBox(){ return &box;}
-    float getXvel() { return xVel;};
+    float *getXvel() { return &xVel;};
     float getYvel() { return yVel;};
     int getRep(){return rep;};
     bool isonTarget(int tx,int ty);

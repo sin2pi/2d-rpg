@@ -9,12 +9,14 @@
 
 extern SDL_Rect camera;
 
-cItem::cItem(int xpos,int ypos,int w,int h,float vel,string file,string script,int index)
+cItem::cItem(int xp,int yp,int w,int h,float vel,string file,string script,int index)
 {
-    box.x = xpos;
-    box.y = ypos;
+    box.x = xp;
+    box.y = yp;
     box.w = w;
     box.h = h;
+    xpos = xp;
+    ypos = yp;
     xvel = yvel = vel;
     filename = file;
     const char *f =file.c_str();
@@ -38,14 +40,11 @@ void cItem::Interact(vector<cItem*> items)
         {
             if(xvel!=0){
                 Physics::elasticCollision(xvel,20,items.at(i)->xvel,20);
-                box.x += xvel;
-                items.at(i)->box.x += items.at(i)->xvel;
             }
             if(yvel!=0) {
                 Physics::elasticCollision(yvel,20,items.at(i)->yvel,20);
-                box.y += yvel;
-                items.at(i)->box.y += items.at(i)->yvel;
             }
+            
         }
     }
     
@@ -54,14 +53,14 @@ void cItem::Interact(vector<cItem*> items)
         xvel -= 0.05;
         if(xvel <= 0)
             xvel = 0;
-        box.x += xvel;
+        xpos += xvel;
     }
     else if(xvel < 0){
         //int xs = xvel;
         xvel += 0.05;
         if(xvel >= 0)
             xvel = 0;
-        box.x += xvel;
+        xpos += xvel;
     }
     else xvel = 0;
     if(yvel > 0){
@@ -69,21 +68,25 @@ void cItem::Interact(vector<cItem*> items)
         yvel -= 0.05;
         if(yvel <= 0)
             yvel = 0;
-        box.y += yvel;
+        ypos += yvel;
     }
     else if(yvel < 0){
         //int xs = xvel;
         yvel += 0.05;
         if(yvel >= 0)
             yvel = 0;
-        box.y += yvel;
+        ypos += yvel;
     }
     else yvel = 0;
+    
+    
 
 }
 
 void cItem::Render()
 {
+    box.x = (int)xpos;
+    box.y = (int)ypos;
     SDL_Rect box1 = {static_cast<Sint16>(box.x-camera.x),static_cast<Sint16>(box.y-camera.y),box.w,box.h};
     if(grabed == false){
         SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindowFromID(1)),txt,NULL,&box1);

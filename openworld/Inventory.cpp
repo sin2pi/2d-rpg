@@ -20,6 +20,7 @@ void Inventory::AddItem(cItem *item)
 }
 void Inventory::QuitItem(int id)
 {
+    delete inventory.at(id);
     inventory.erase(inventory.begin()+id);
 }
 

@@ -223,10 +223,12 @@ void cNpc::Interact(cPlayer p)
             {
                 if(side[1])
                 {
+                    box.x -= xVel;
                     xVel = 0;
                 }
                 else if(side[3])
                 {
+                    box.x += xVel;
                     xVel = 0;
                 }
                 if(side[0])

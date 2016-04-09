@@ -12,22 +12,22 @@ extern "C"
 }
 class LuaPrompt
 {
-public:
-    //Constructor & Deconstructor
-    LuaPrompt();
-    ~LuaPrompt();
+    
+private:
     int c = 1;
     SDL_Texture *txt;
-
+    
     TTF_Font *font2;
     SDL_Color green = {0,200,0};
     bool PromptActive;
-    //String Holder
     std::string str;
-    //Update Prompt Text
+    
+public:
+    LuaPrompt();
+    ~LuaPrompt();
+
     void update(SDL_Surface*);
-    //Handle Input To Prompt
-    void handle_input();
+    void HandleInput();
 };
 
 #endif // LUAPROMPT_H

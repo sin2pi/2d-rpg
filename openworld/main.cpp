@@ -40,13 +40,8 @@ int main(int argc,char* argv[])
     TTF_Init();
     
     LuaPrompt prompt;
-    prompt.PromptActive = true;
     
-    window = SDL_CreateWindow
-    ("openworld", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,640,480,
-     SDL_WINDOW_RESIZABLE
-     );
-    
+    window = SDL_CreateWindow("openworld", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,640,480,SDL_WINDOW_RESIZABLE);
     // Setup renderer
     
     renderer =  SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
@@ -80,7 +75,7 @@ int main(int argc,char* argv[])
     
     ParticleEngine par(4000,l1,l2,pos);
     
-    cPlayer player(0,100,20,40,2,2,2,"mario.bmp",3);
+    cPlayer player(0,100,20,40,2,2,0.2,"mario.bmp",3);
     
     LoadNpcList(&npc,"npcl.txt");
     LoadItemList(&items,"iteml.txt");
@@ -116,7 +111,7 @@ int main(int argc,char* argv[])
             }
             inv.HandleInput(event,player,items);
             player.HandleInput(event,items,&inv);
-            prompt.handle_input();
+            prompt.HandleInput();
         }
         
         for(int i = 0;i<npc.size();i++)
@@ -128,6 +123,7 @@ int main(int argc,char* argv[])
         }
         //npc.at(1)->runRandPath();
         player.Move();
+        player.Interact(npc);
         camera = player.SetCamera(camera);
         map1.RenderLayer(ttiles,0);
         for(int j = 0;j<items.size();j++)

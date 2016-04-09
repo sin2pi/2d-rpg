@@ -26,7 +26,7 @@ private:
     bool used,dropped,moved;
     int state;
     float vel;
-    float xvel,yvel;
+    float xvel,yvel,xpos,ypos;
     string sf;
     int id;
     string filename;
@@ -42,7 +42,7 @@ public:
     SDL_Rect *getRect(){ return &box;};
     float &getVel(int a){if(a==1)return xvel;else return yvel;}
     int getState(){ return state;};
-    void setPos(int x,int y){box = {static_cast<Sint16>(x),static_cast<Sint16>(y),box.w,box.h};};
+    void setPos(int x,int y){xpos = x;ypos = y;};
     void setVel(float xv,float yv){xvel = xv;yvel = yv;}
     SDL_Texture *getImage(){return txt;};
     int getId(){return id;};

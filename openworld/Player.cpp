@@ -7,6 +7,8 @@ cPlayer::cPlayer(float x,float y,int w,int h,float xspeed,float yspeed,float acc
     image = SDL_LoadBMP(file);
     box.x = x;
     box.y = y;
+    xpos = x;
+    ypos = y;
     box.w = w+5;
     box.h = h+10;
     xSpeed = xspeed;
@@ -25,15 +27,31 @@ cPlayer::cPlayer(float x,float y,int w,int h,float xspeed,float yspeed,float acc
 
 void cPlayer::Interact(vector<cNpc *> n)
 {
-    for(int i = 0; i< n.size();i++)
+    cout << xVel << endl;
+    float y = 0;
+    for(int i = 0; i < n.size();i++)
     {
         if(Physics::collision(&box,n.at(i)->getBox()))
         {
-            if(dir[1] || dir[3])
-            box.x -= xVel;
-            if(dir[0] || dir[2])
-            box.y -= yVel;
+            coliding = true;
+            if(xVel < 0){
+                xpos -= xVel;
+                xVel = 0;
+            }
+            if(xVel > 0){
+                xpos -= xVel;
+                xVel = 0;
+            }
+            if(yVel < 0){
+                ypos -= yVel;
+                yVel = 0;
+            }
+            if(yVel > 0){
+                ypos -= yVel;
+                yVel = 0;
+            }
         }
+        else coliding = false;
     }
 }
 
@@ -190,8 +208,7 @@ void cPlayer::HandleInput(SDL_Event event,vector<cItem*>n,Inventory *inv)
 
 void cPlayer::Move()
 {
-    
-    
+    if(!coliding){
     if(dir[0] == 1){
         yVel -= acceleration;
         if(yVel < -ySpeed)
@@ -210,48 +227,47 @@ void cPlayer::Move()
             yVel += acceleration;
             if(yVel > 0.0)
                 yVel = 0.0;
+        }
+
+        else if(yVel > 0){
+            yVel -= acceleration;
+            if(yVel < 0.0)
+                yVel = 0.0;
+        }
+    
     }
 
-    else {
-        yVel -= acceleration;
-        if(yVel < 0.0)
-            yVel = 0.0;
-    }
-
-    }
-
-
-    if(dir[1] == 1){
-        xVel -= acceleration;
-        if(xVel < -xSpeed)
-            xVel = -xSpeed;
-    }
-
-    else if(dir[3] == 1){
+    if(dir[3] == 1){
         xVel += acceleration;
         if(xVel > xSpeed)
             xVel = xSpeed;
     }
-
+    else if(dir[1] == 1){
+        xVel -= acceleration;
+        if(xVel < -xSpeed)
+            xVel = -xSpeed;
+    }
     else{
         if(xVel < 0)
         {
             xVel += acceleration;
             if(xVel > 0.0)
                 xVel = 0.0;
+        }
+        
+        else if(xVel > 0){
+            xVel -= acceleration;
+            if(xVel < 0.0)
+                xVel = 0.0;
+        }
+        
     }
-
-    else {
-        xVel -= acceleration;
-        if(xVel < 0.0)
-            xVel = 0.0;
     }
-
-    }
-
-    box.x += xVel;
-    box.y += yVel;
-
+    xpos += xVel;
+    ypos += yVel;
+        
+    box.x = (int)xpos;
+    box.y = (int)ypos;
     /*
     if(box.x + box.w >= 1280)
         box.x -= xVel;

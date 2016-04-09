@@ -21,6 +21,8 @@ class cPlayer
     float acceleration;
     bool grabing = false;
     int count = 0;
+    bool coliding = false;
+    float xpos,ypos;
     
     SDL_Rect box;
     vector<Animation*>idle;
