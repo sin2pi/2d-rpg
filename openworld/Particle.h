@@ -14,7 +14,7 @@
 
 
 struct vec2d{
-    float x,y;
+    float x,y,w,h;
 };
 
 class Particle{

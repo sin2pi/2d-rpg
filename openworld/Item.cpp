@@ -15,8 +15,10 @@ cItem::cItem(int xp,int yp,int w,int h,float vel,string file,string script,int i
     box.y = yp;
     box.w = w;
     box.h = h;
-    xpos = xp;
-    ypos = yp;
+    pos.x = xp;
+    pos.y = yp;
+    pos.w = w;
+    pos.h = h;
     xvel = yvel = vel;
     filename = file;
     const char *f =file.c_str();
@@ -36,31 +38,37 @@ void cItem::Interact(vector<cItem*> items)
         {
             continue;
         }
-        else if(Physics::collision(&box,items.at(i)->getRect()))
+        else if(Physics::collision(&pos,&items.at(i)->pos))
         {
             if(xvel!=0){
                 Physics::elasticCollision(xvel,20,items.at(i)->xvel,20);
+                pos.x += xvel;
+                box.x += xvel;
+                items.at(i)->pos.x += items.at(i)->xvel;
+                items.at(i)->box.x += items.at(i)->xvel;
             }
             if(yvel!=0) {
                 Physics::elasticCollision(yvel,20,items.at(i)->yvel,20);
+                pos.y += yvel;
+                box.y += yvel;
+                items.at(i)->pos.y += items.at(i)->yvel;
             }
             
         }
     }
-    
     if(xvel > 0){
         //int xs = xvel;
         xvel -= 0.05;
         if(xvel <= 0)
             xvel = 0;
-        xpos += xvel;
+        pos.x += xvel;
     }
     else if(xvel < 0){
         //int xs = xvel;
         xvel += 0.05;
         if(xvel >= 0)
             xvel = 0;
-        xpos += xvel;
+        pos.x += xvel;
     }
     else xvel = 0;
     if(yvel > 0){
@@ -68,25 +76,22 @@ void cItem::Interact(vector<cItem*> items)
         yvel -= 0.05;
         if(yvel <= 0)
             yvel = 0;
-        ypos += yvel;
+        pos.y += yvel;
     }
     else if(yvel < 0){
         //int xs = xvel;
         yvel += 0.05;
         if(yvel >= 0)
             yvel = 0;
-        ypos += yvel;
+        pos.y += yvel;
     }
     else yvel = 0;
-    
-    
-
 }
 
 void cItem::Render()
 {
-    box.x = (int)xpos;
-    box.y = (int)ypos;
+    box.x = (int)pos.x;
+    box.y = (int)pos.y;
     SDL_Rect box1 = {static_cast<Sint16>(box.x-camera.x),static_cast<Sint16>(box.y-camera.y),box.w,box.h};
     if(grabed == false){
         SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindowFromID(1)),txt,NULL,&box1);

@@ -22,6 +22,8 @@ class cPlayer
     bool grabing = false;
     int count = 0;
     bool coliding = false;
+    bool moving = false;
+    int movId;
     float xpos,ypos;
     
     SDL_Rect box;
@@ -34,6 +36,9 @@ class cPlayer
     public:
     float xSpeed,ySpeed;
     float xVel,yVel;
+    bool isGrabbing(){return grabing;}
+    bool &isMoving(){return moving;}
+    float getVel(int a){if(a==1)return xVel;else return yVel;}
     SDL_Rect *getBox(){ return &box;}
     cPlayer(float x,float y,int w,int h,float xspeed,float yspeed,float acc,const char*file,int nx);
     SDL_Rect SetCamera(SDL_Rect cam);

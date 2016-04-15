@@ -28,7 +28,6 @@ cPlayer::cPlayer(float x,float y,int w,int h,float xspeed,float yspeed,float acc
 void cPlayer::Interact(vector<cNpc *> n)
 {
     cout << xVel << endl;
-    float y = 0;
     for(int i = 0; i < n.size();i++)
     {
         if(Physics::collision(&box,n.at(i)->getBox()))
@@ -50,6 +49,7 @@ void cPlayer::Interact(vector<cNpc *> n)
                 ypos -= yVel;
                 yVel = 0;
             }
+            
         }
         else coliding = false;
     }
@@ -57,7 +57,7 @@ void cPlayer::Interact(vector<cNpc *> n)
 
 void cPlayer::Interact(vector<cItem *> n)
 {
-    if(grabing)
+    if(grabing && !moving)
     {
         for(int i=0;i<n.size();i++)
         {
@@ -67,9 +67,24 @@ void cPlayer::Interact(vector<cItem *> n)
                 int y = box.y-n.at(i)->getRect()->h/2;
                 n.at(i)->setPos(x,y);
                 n.at(i)->setVel(xVel,yVel);
+                moving = true;
+                movId = n.at(i)->getId();
             }
         }
     }
+    
+    else if(grabing && moving){
+        if(Physics::collision(&box,n.at(movId)->getRect())){
+            int x = (box.x+box.w/2)-(n.at(movId)->getRect()->w/2);
+            int y = box.y-n.at(movId)->getRect()->h/2;
+            n.at(movId)->setPos(x,y);
+            n.at(movId)->setVel(xVel,yVel);
+        }
+    }
+    else {
+        moving = false;
+    }
+
 
 }
 

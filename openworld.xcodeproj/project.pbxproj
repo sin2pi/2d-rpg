@@ -37,6 +37,7 @@
 		DD196BD91CAC33B800EDB55D /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
 		DD196BDF1CAC387B00EDB55D /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
 		DD23334B1CA61DE3001100CC /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		DD23A2001CBAC9A400ACD608 /* vec2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vec2d.h; sourceTree = "<group>"; };
 		DD2415231C24FFE5009C2322 /* Animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animation.cpp; sourceTree = "<group>"; };
 		DD2415241C24FFE5009C2322 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		DD2415261C25018C009C2322 /* Luigi.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Luigi.bmp; sourceTree = "<group>"; };
@@ -130,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				DD23334B1CA61DE3001100CC /* main.cpp */,
+				DD23A2001CBAC9A400ACD608 /* vec2d.h */,
 				DD35BB911CA4A8260088210D /* luaCalls.h */,
 				DD30B82A1C729F8100835197 /* listManager.h */,
 				DD8DAA961C0E453100E138BF /* Physics.h */,

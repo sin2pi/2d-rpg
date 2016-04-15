@@ -41,7 +41,7 @@ int main(int argc,char* argv[])
     
     LuaPrompt prompt;
     
-    window = SDL_CreateWindow("openworld", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,640,480,SDL_WINDOW_RESIZABLE);
+    window = SDL_CreateWindow("openworld", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,640,480,SDL_WINDOW_FULLSCREEN);
     // Setup renderer
     
     renderer =  SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
@@ -105,10 +105,6 @@ int main(int argc,char* argv[])
         player.Interact(items);
         while(SDL_PollEvent(&event))
         {
-            for(int i = 0;i< items.size();i++)
-            {
-                //items.at(i)->Interact(event,player,&inv);
-            }
             inv.HandleInput(event,player,items);
             player.HandleInput(event,items,&inv);
             prompt.HandleInput();
@@ -143,11 +139,6 @@ int main(int argc,char* argv[])
         inv.Render();
         
         prompt.update(screen);
-        
-        numFrames++;
-        //int fps = (numFrames/(float)(SDL_GetTicks() - startTime) )*1000;
-        //cout << "fps: " << fps;
-        //SDL_GL_SwapBuffers();
         
         SDL_RenderPresent(renderer);
         if (1000/60>SDL_GetTicks()-start)
