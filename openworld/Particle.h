@@ -28,6 +28,7 @@ private:
     bool dead = false;
     float speed;
     int ix,iy;
+    vec2d posVec;
     
     
 public:

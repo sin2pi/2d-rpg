@@ -32,6 +32,7 @@ void cPlayer::Interact(vector<cNpc *> n)
     {
         if(Physics::collision(&box,n.at(i)->getBox()))
         {
+            //trigger conversation TODO
             coliding = true;
             if(xVel < 0){
                 xpos -= xVel;
@@ -138,11 +139,11 @@ void cPlayer::HandleInput(SDL_Event event,vector<cItem*>n,Inventory *inv)
             if ( event.jbutton.button == 1 )
             {
                 for(int i = 0;i < n.size();i++){
-                    if(Physics::collision(&box,n.at(i)->getRect())&& !n.at(i)->grabed)
+                    if(Physics::collision(&box,n.at(i)->getRect())&& !n.at(i)->isGrabed())
                     {
                         //int x = n.at(<#size_type __n#>)
                         inv->AddItem(new cItem(box.x,box.y,box.w,box.h,0,n.at(i)->getImgFile(),n.at(i)->getScript(),n.at(i)->getId()));
-                        n.at(i)->grabed = true;
+                        n.at(i)->isGrabed() = true;
                     }
                 }
             }
@@ -183,11 +184,11 @@ void cPlayer::HandleInput(SDL_Event event,vector<cItem*>n,Inventory *inv)
                 break;
             case SDLK_g:
                 for(int i = 0;i < n.size();i++){
-                    if(Physics::collision(&box,n.at(i)->getRect())&& !n.at(i)->grabed)
+                    if(Physics::collision(&box,n.at(i)->getRect())&& !n.at(i)->isGrabed())
                     {
                         //int x = n.at(<#size_type __n#>)
                         inv->AddItem(new cItem(box.x,box.y,box.w,box.h,0,n.at(i)->getImgFile(),n.at(i)->getScript(),n.at(i)->getId()));
-                        n.at(i)->grabed = true;
+                        n.at(i)->isGrabed() = true;
                     }
                 }
                 break;

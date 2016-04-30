@@ -23,6 +23,8 @@ private:
     vec2d lim1,lim2;
     int ix,iy;
     vec2d pos;
+    float speed;
+    vec2d dir;
     
 public:
     
@@ -60,8 +62,7 @@ public:
     
     void Run()
     {
-        float speed;
-        vec2d dir;
+        
         for(int i = 0;i<particles.size();i++)
         {
             particles.at(i)->Update();
@@ -72,8 +73,9 @@ public:
                 dir.y =rand()%10-5;
                 //dir.x = Rand(lim1.x, lim2.x);
                 //dir.y = Rand(lim1.y, lim2.y);
-                speed = Rand(1,4);
-                int time = Rand(1000,3000);
+                speed = Rand(0,0);
+
+                int time = Rand(300,700);
                 delete particles.at(i);
                 particles.erase(particles.begin()+i);
                 particles.push_back(new Particle(pos,dir,speed,time));

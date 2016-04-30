@@ -12,8 +12,10 @@
 Particle::Particle(vec2d p,vec2d d,float s,int lf){
     pos.x = p.x;
     pos.y = p.y;
-    pos.w = 4;
-    pos.h = 4;
+    pos.w = 7;
+    pos.h = 7;
+    posVec.x = p.x;
+    posVec.y = p.y;
     ix = p.x;
     iy = p.y;
     dir.x = d.x;
@@ -26,8 +28,10 @@ Particle::Particle(vec2d p,vec2d d,float s,int lf){
 
 void Particle::Update(){
     if(!isDead()){
-        pos.x += dir.x * speed;
-        pos.y += dir.y * speed;
+        posVec.x += dir.x * speed;
+        posVec.y += dir.y * speed;
+        pos.x = (int)posVec.x;
+        pos.y = (int)posVec.y;
     }
     
 }

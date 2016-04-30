@@ -33,6 +33,7 @@ class cNpc
     int horRange;
     int iX,iY;
     int nx;
+    float xVel,yVel,ySpeed,xSpeed;
     Animation *ranim;
     Animation *lanim;
     vector <Animation*>idle;
@@ -44,7 +45,7 @@ class cNpc
     Uint32 timer;
  
     public:
-     float xVel,yVel,ySpeed,xSpeed;
+    
     cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,int rp,const char*file,int nx);
     SDL_Rect *getBox(){ return &box;}
     float *getXvel() { return &xVel;};

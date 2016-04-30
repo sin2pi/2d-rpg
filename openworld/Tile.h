@@ -14,10 +14,15 @@ class cTile
     SDL_Texture *txt;
     int LoadCounterX,LoadCounterY;
     bool once;
+    int xs,ys;
+    int tw,th;
+    int amt;
+    SDL_Rect clip[100];
     
     public:
     
-    cTile();
+    cTile(int w,int h);
+    void LoadSheet(const char*file);
     void LoadMap(const char* filename);
     void RenderMap(SDL_Surface *tiles[]);
     void RenderLayer(SDL_Texture *tiles[],int layer);

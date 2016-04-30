@@ -39,7 +39,7 @@ void Inventory::HandleInput(SDL_Event event,cPlayer player,vector<cItem*>items)
                 {
                     SDL_Rect rec = {static_cast<Sint16>((100+(i*60))),400,30,30};
                     if(Physics::collision(&mouse,&rec)){
-                        items.at(inventory.at(i)->getId())->grabed = false;
+                        items.at(inventory.at(i)->getId())->isGrabed() = false;
                         items.at(inventory.at(i)->getId())->setPos(player.getBox()->x, player.getBox()->y);
                         inventory.erase(inventory.begin()+i);
                     }
@@ -49,7 +49,7 @@ void Inventory::HandleInput(SDL_Event event,cPlayer player,vector<cItem*>items)
             if(event.jbutton.button == 3)
             {
                 if(inventory.size() >= 1){
-                    items.at(inventory.at(queue)->getId())->grabed = false;
+                    items.at(inventory.at(queue)->getId())->isGrabed() = false;
                     items.at(inventory.at(queue)->getId())->setPos(player.getBox()->x, player.getBox()->y);
                     inventory.erase(inventory.begin()+queue);
                 }

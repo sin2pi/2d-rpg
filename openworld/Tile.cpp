@@ -2,9 +2,28 @@
 
 extern SDL_Rect camera;
 
-cTile::cTile()
+cTile::cTile(int w,int h)
 {
-    
+    tw = w;
+    th = h;
+}
+
+void cTile::LoadSheet(const char *file)
+{
+    SDL_Surface *sur =  SDL_LoadBMP(file);
+    txt = SDL_CreateTextureFromSurface(SDL_GetRenderer(SDL_GetWindowFromID(1)), sur);
+    xs = sur->w/tw;
+    ys = sur->h/th;
+    SDL_FreeSurface(sur);
+    int cnt = 0;
+    for(int i = 0;i < ys;i++)
+    {
+        for(int j = 0;j < xs;j++)
+        {
+            clip[cnt] = {tw*j,th*i,tw,th};
+            cnt++;
+        }
+    }
 }
 
 void cTile::LoadMap(const char *filename)
@@ -54,13 +73,13 @@ void cTile::RenderLayer(SDL_Texture *tiles[],int ln)
 		for(int j = 0; j < mapSizeY; j++)
 		{
 		    SDL_Rect rect;
-		    rect.x = i*32 - camera.x;
-		    rect.y = j*32 - camera.y;
-            rect.w = 32;
-            rect.h = 32;
+		    rect.x = i*tw - camera.x;
+		    rect.y = j*th - camera.y;
+            rect.w = tw;
+            rect.h = th;
             //SDL_DisplayFormat(*tiles);
             
-            SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindowFromID(1)),tiles[layer[i][j][ln]],NULL,&rect);
+            SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindowFromID(1)),txt,&clip[layer[i][j][ln]],&rect);
 		}
 	}
 }

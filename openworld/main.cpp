@@ -41,7 +41,7 @@ int main(int argc,char* argv[])
     
     LuaPrompt prompt;
     
-    window = SDL_CreateWindow("openworld", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,640,480,SDL_WINDOW_FULLSCREEN);
+    window = SDL_CreateWindow("openworld", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,640,480,SDL_WINDOW_RESIZABLE);
     // Setup renderer
     
     renderer =  SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
@@ -55,8 +55,9 @@ int main(int argc,char* argv[])
     //*static_cast<cPlayer**>(lua_getextraspace(L)) = &distance;
     RegisterCalls(L);
     
-    cTile map1;
+    cTile map1(30,30);
     map1.LoadMap("map.txt");
+    map1.LoadSheet("sheet.bmp");
     
     SDL_Surface *tiles[5];
     tiles[0] = SDL_LoadBMP("tile1.bmp");
@@ -75,7 +76,7 @@ int main(int argc,char* argv[])
     
     ParticleEngine par(4000,l1,l2,pos);
     
-    cPlayer player(0,100,20,40,2,2,0.2,"mario.bmp",3);
+    cPlayer player(0,100,20,40,3,3,0.2,"mario.bmp",3);
     
     LoadNpcList(&npc,"npcl.txt");
     LoadItemList(&items,"iteml.txt");
@@ -94,9 +95,8 @@ int main(int argc,char* argv[])
     
     Inventory inv;
     
-    int numFrames = 0;
     Uint32 start;
-    Uint32 startTime = SDL_GetTicks();
+    
     while(running)
     {
         start = SDL_GetTicks();
@@ -132,10 +132,13 @@ int main(int argc,char* argv[])
             npc.at(i)->Render();
         }
         player.Render(camera);
-        par.SetPos(player.getBox()->x-camera.x,player.getBox()->y-camera.y);
-        //par.Run();
-        //par.Render();
-        map1.RenderLayer(ttiles,1);
+        int px,py;
+        SDL_GetMouseState(&px,&py);
+        par.SetPos(px,py);
+        par.Run();
+        par.Render();
+        //map1.RenderLayer(ttiles,1);
+        //map1.RenderLayer(ttiles,2);
         inv.Render();
         
         prompt.update(screen);

@@ -25,6 +25,9 @@ private:
     SDL_Surface *image;
     SDL_Texture *txt;
     
+    bool grabed;
+    bool used,dropped,moved;
+    
     int state;
     float vel;
     float xvel,yvel;
@@ -34,15 +37,13 @@ private:
     string filename;
     
 public:
-    bool grabed;
-    bool used,dropped,moved;
-    
     
     string getScript(){return sf;}
     string getImgFile(){return filename;}
     cItem(int xpos,int ypos,int w,int h,float vel,string file,string script,int index);
     void Render();
     void Interact(vector<cItem*>items);
+    bool &isGrabed(){return grabed;}
     SDL_Rect getPos(){ return box;};
     SDL_Rect *getRect(){ return &box;};
     int getState(){ return state;};
