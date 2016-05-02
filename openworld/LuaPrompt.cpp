@@ -1,8 +1,6 @@
 #include "LuaPrompt.h"
 #include "lua.h"
 
-extern lua_State *L;
-extern SDL_Event event;
 
 SDL_Surface* Prompt;
 LuaPrompt::LuaPrompt()
@@ -37,7 +35,7 @@ void LuaPrompt::update(SDL_Surface* screen)
     }
 
 }
-void LuaPrompt::HandleInput()
+void LuaPrompt::HandleInput(SDL_Event event,lua_State *L)
 {
     if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_TAB){
         if(PromptActive)

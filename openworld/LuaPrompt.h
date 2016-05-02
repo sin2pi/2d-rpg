@@ -10,6 +10,7 @@ extern "C"
 #include "lauxlib.h"
 #include "lualib.h"
 }
+
 class LuaPrompt
 {
     
@@ -27,7 +28,7 @@ public:
     ~LuaPrompt();
 
     void update(SDL_Surface*);
-    void HandleInput();
+    void HandleInput(SDL_Event event,lua_State *L);
 };
 
 #endif // LUAPROMPT_H

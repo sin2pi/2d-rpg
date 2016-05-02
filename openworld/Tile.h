@@ -25,6 +25,6 @@ class cTile
     void LoadSheet(const char*file);
     void LoadMap(const char* filename);
     void RenderMap(SDL_Surface *tiles[]);
-    void RenderLayer(SDL_Texture *tiles[],int layer);
+    void RenderLayer(int layer);
     
 };

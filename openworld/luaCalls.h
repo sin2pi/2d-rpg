@@ -18,8 +18,11 @@ extern "C" {
 #include "lauxlib.h"
 }
 
+#include "LuaBridge.h"
+
 extern vector<cNpc*>npc;
 extern vector<cItem*>items;
+extern int amb;
 
 int itemVel(lua_State *L){
     
@@ -27,9 +30,9 @@ int itemVel(lua_State *L){
     return 0;
 }
 
-int itemPos(lua_State *L){
-    int arg = -lua_gettop(L);
-    items.at(lua_tonumber(L,arg))->setPos(arg+1,arg+2);
+int itemPos(cItem item,int x,int y){
+    //int arg = -lua_gettop(L);
+    item.setPos(x,y);
     return 0;
 }
 
@@ -135,8 +138,9 @@ int runScript(lua_State *L){
 
 void RegisterCalls(lua_State *L)
 {
+
     lua_register(L,"itemVel",itemVel);
-    lua_register(L,"itemPos",itemPos);
+    //lua_register(L,"itemPos",itemPos);
     lua_register(L,"setItem",setItem);
     lua_register(L,"deleteItem",deleteItem);
     lua_register(L,"setNpc",setNpc);

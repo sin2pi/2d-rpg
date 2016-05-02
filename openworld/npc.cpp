@@ -1,8 +1,6 @@
 #include "npc.h"
 
-extern SDL_Surface *screen;
-extern SDL_Rect camera;
-extern bool collision(SDL_Rect* rect1,SDL_Rect* rect2);
+
 using namespace std;
 
 cNpc::cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,int rp,const char*file,int nx)
@@ -30,6 +28,12 @@ cNpc::cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,in
     image = SDL_LoadBMP(file);
     SDL_SetColorKey(image,SDL_TRUE,SDL_MapRGB(image->format,0,255,255));
     txt = SDL_CreateTextureFromSurface(SDL_GetRenderer(SDL_GetWindowFromID(1)),image);
+}
+
+void cNpc::setPos(int x,int y)
+{
+    box.x = x;
+    box.y = y;
 }
 
 int Rand(int min, int max)
@@ -78,11 +82,7 @@ void cNpc::setSpeed(float n)
     ySpeed = n;
 }
 
-void cNpc::setPos(int x, int y)
-{
-    box.x = x;
-    box.y = y;
-}
+
 
 void cNpc::setRep(int n)
 {
@@ -346,7 +346,7 @@ void cNpc::Move(int x, int y)
      }
 }
 
-void cNpc::Render()
+void cNpc::Render(SDL_Rect camera)
 {
     SDL_Rect rect = {static_cast<Sint16>(box.x - camera.x), static_cast<Sint16>(box.y - camera.y),box.w,box.h};
     if(Hp > 0){

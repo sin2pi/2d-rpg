@@ -1,4 +1,7 @@
 #include "Tile.h"
+#include "Physics.h"
+
+Physics physics;
 
 extern SDL_Rect camera;
 
@@ -66,8 +69,9 @@ void cTile::LoadMap(const char *filename)
     }
 }
 
-void cTile::RenderLayer(SDL_Texture *tiles[],int ln)
+void cTile::RenderLayer(int ln)
 {
+    float lif = 0.6;
     for(int i = 0; i < mapSizeX; i++)
 	{
 		for(int j = 0; j < mapSizeY; j++)
@@ -77,8 +81,7 @@ void cTile::RenderLayer(SDL_Texture *tiles[],int ln)
 		    rect.y = j*th - camera.y;
             rect.w = tw;
             rect.h = th;
-            //SDL_DisplayFormat(*tiles);
-            
+            SDL_SetTextureColorMod(txt,255*lif,255*lif,255*lif);
             SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindowFromID(1)),txt,&clip[layer[i][j][ln]],&rect);
 		}
 	}

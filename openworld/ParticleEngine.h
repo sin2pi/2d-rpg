@@ -69,13 +69,13 @@ public:
             if(particles.at(i)->isDead())
             {
                 
-                dir.x =rand()%10-5;
-                dir.y =rand()%10-5;
-                //dir.x = Rand(lim1.x, lim2.x);
-                //dir.y = Rand(lim1.y, lim2.y);
-                speed = Rand(0,0);
+                //dir.x =(float)(rand()%-10+10);
+                //dir.y =(float)(rand()%-20);
+                dir.x = -1*RandomFloat(1,-1);
+                dir.y = -1*RandomFloat(-1.16,1.16);
+                speed = Rand(5,7);
 
-                int time = Rand(300,700);
+                int time = Rand(500,1000);
                 delete particles.at(i);
                 particles.erase(particles.begin()+i);
                 particles.push_back(new Particle(pos,dir,speed,time));

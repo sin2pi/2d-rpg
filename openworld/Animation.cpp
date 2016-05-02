@@ -31,6 +31,7 @@ Animation::Animation(int x,int y,int w,int h,int nx,int speed)
 
 void Animation::RenderFrame(SDL_Rect pos, SDL_Texture *txt)
 {
+    SDL_SetTextureColorMod(txt,100,100,100);
     //SDL_Texture *txt = SDL_CreateTextureFromSurface(renderer, img);
     SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindowFromID(1)), txt, &clip[frame],&pos);
     //SDL_BlitSurface(img,&clip[frame],SDL_GetVideoSurface(),&pos);
@@ -50,6 +51,6 @@ void Animation::RunAnimation(SDL_Rect pos, SDL_Texture *txt)
     float angle = 0.0f; // set the angle.
     SDL_Point center = {8, 8}; // the center where the texture will be rotated.
     SDL_RendererFlip flip = SDL_FLIP_NONE; // the flip of the texture.
-    
+    SDL_SetTextureColorMod(txt,100,100,100);
     SDL_RenderCopyEx(SDL_GetRenderer(SDL_GetWindowFromID(1)), txt, &clip[frame],&pos,angle,&center,flip);
 }

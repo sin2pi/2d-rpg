@@ -1,7 +1,5 @@
 #include "Player.h"
 
-extern bool running;
-
 cPlayer::cPlayer(float x,float y,int w,int h,float xspeed,float yspeed,float acc,const char*file,int nx)
 {
     image = SDL_LoadBMP(file);
@@ -9,17 +7,49 @@ cPlayer::cPlayer(float x,float y,int w,int h,float xspeed,float yspeed,float acc
     box.y = y;
     xpos = x;
     ypos = y;
-    box.w = w+5;
-    box.h = h+10;
+    box.w = w-5;
+    box.h = h-10;
     xSpeed = xspeed;
     ySpeed = yspeed;
     acceleration = acc;
-    ranim = new Animation(0,0,w,h,nx,10);
+    ranim = new Animation(0,h*2,w,h,nx,10);
     lanim = new Animation(0,h,w,h,nx,10);
+    danim = new Animation(0,0,w,h,nx,10);
+    uanim = new Animation(0,h*3,w,h,nx,10);
     SDL_Rect rect = {0,0,static_cast<Uint16>(w),static_cast<Uint16>(h)};
-    idle.push_back(new Animation(0,0,w,h,1,10));
     rect = {0,static_cast<Sint16>(h),static_cast<Uint16>(w),static_cast<Uint16>(h)};
-    idle.push_back(new Animation(w*2,h,w,h,1,10));
+    idle.push_back(new Animation(0,0,w,h,1,10));
+    idle.push_back(new Animation(0,h,w,h,1,10));
+    idle.push_back(new Animation(0,h*2,w,h,1,10));
+    idle.push_back(new Animation(0,h*3,w,h,1,10));
+    SDL_SetColorKey(image,SDL_TRUE,SDL_MapRGB(image->format,0,255,255));
+    txt = SDL_CreateTextureFromSurface(SDL_GetRenderer(SDL_GetWindowFromID(1)), image);
+    idleframe = 0;
+}
+
+
+cPlayer::cPlayer(float x,float y,int w,int h,float xspeed,float yspeed,float acc)
+{
+    image = SDL_LoadBMP("chrono.bmp");
+    box.x = x;
+    box.y = y;
+    xpos = x;
+    ypos = y;
+    box.w = w-5;
+    box.h = h-10;
+    xSpeed = xspeed;
+    ySpeed = yspeed;
+    acceleration = acc;
+    ranim = new Animation(0,h*2,w,h,4,10);
+    lanim = new Animation(0,h,w,h,4,10);
+    danim = new Animation(0,0,w,h,4,10);
+    uanim = new Animation(0,h*3,w,h,4,10);
+    SDL_Rect rect = {0,0,static_cast<Uint16>(w),static_cast<Uint16>(h)};
+    rect = {0,static_cast<Sint16>(h),static_cast<Uint16>(w),static_cast<Uint16>(h)};
+    idle.push_back(new Animation(0,0,w,h,1,10));
+    idle.push_back(new Animation(0,h,w,h,1,10));
+    idle.push_back(new Animation(0,h*2,w,h,1,10));
+    idle.push_back(new Animation(0,h*3,w,h,1,10));
     SDL_SetColorKey(image,SDL_TRUE,SDL_MapRGB(image->format,0,255,255));
     txt = SDL_CreateTextureFromSurface(SDL_GetRenderer(SDL_GetWindowFromID(1)), image);
     idleframe = 0;
@@ -27,7 +57,7 @@ cPlayer::cPlayer(float x,float y,int w,int h,float xspeed,float yspeed,float acc
 
 void cPlayer::Interact(vector<cNpc *> n)
 {
-    cout << xVel << endl;
+    //cout << xVel << endl;
     for(int i = 0; i < n.size();i++)
     {
         if(Physics::collision(&box,n.at(i)->getBox()))
@@ -93,7 +123,7 @@ void cPlayer::HandleInput(SDL_Event event,vector<cItem*>n,Inventory *inv)
 {
     switch(event.type){
         case SDL_QUIT:
-            running = false;
+            //running = false;
             break;
         case SDL_JOYAXISMOTION:  /* Handle Joystick Motion */
             //cout << event.jaxis.value << endl;
@@ -180,7 +210,7 @@ void cPlayer::HandleInput(SDL_Event event,vector<cItem*>n,Inventory *inv)
                 dir[3] = 1;
                 break;
              case SDLK_ESCAPE:
-                running = false;
+                //running = false;
                 break;
             case SDLK_g:
                 for(int i = 0;i < n.size();i++){
@@ -329,26 +359,28 @@ void cPlayer::Render(SDL_Rect camera)
     
     if(dir[1])
     {
-        
+        idleframe = 1;
         lanim->RunAnimation(rect,txt);
     }
     else if(dir[3])
     {
+        idleframe = 2;
         ranim->RunAnimation(rect,txt);
     }
     else if(dir[0])
     {
-        idleframe = 0;
-        ranim->RunAnimation(rect,txt);
+        idleframe = 3;
+        uanim->RunAnimation(rect,txt);
     }
     else if(dir[2])
     {
         idleframe = 0;
-        ranim->RunAnimation(rect,txt);
+        danim->RunAnimation(rect,txt);
     }
     
-    else
+    else{
         idle.at(idleframe)->RunAnimation(rect,txt);
+    }
     
     //SDL_BlitSurface(image,NULL,SDL_GetVideoSurface(),&rect);
 }

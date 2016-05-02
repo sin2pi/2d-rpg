@@ -41,6 +41,25 @@
 		DD2415231C24FFE5009C2322 /* Animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animation.cpp; sourceTree = "<group>"; };
 		DD2415241C24FFE5009C2322 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		DD2415261C25018C009C2322 /* Luigi.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Luigi.bmp; sourceTree = "<group>"; };
+		DD2D4A111CD6B421006366B8 /* luawrapper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = luawrapper.hpp; sourceTree = "<group>"; };
+		DD2D4A121CD6B421006366B8 /* luawrapperutil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = luawrapperutil.hpp; sourceTree = "<group>"; };
+		DD2D4A151CD7A650006366B8 /* CFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFunctions.h; sourceTree = "<group>"; };
+		DD2D4A161CD7A650006366B8 /* ClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassInfo.h; sourceTree = "<group>"; };
+		DD2D4A171CD7A650006366B8 /* Constructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constructor.h; sourceTree = "<group>"; };
+		DD2D4A181CD7A650006366B8 /* dump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dump.h; sourceTree = "<group>"; };
+		DD2D4A191CD7A650006366B8 /* FuncTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuncTraits.h; sourceTree = "<group>"; };
+		DD2D4A1A1CD7A650006366B8 /* Iterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Iterator.h; sourceTree = "<group>"; };
+		DD2D4A1B1CD7A650006366B8 /* LuaException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaException.h; sourceTree = "<group>"; };
+		DD2D4A1C1CD7A650006366B8 /* LuaHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaHelpers.h; sourceTree = "<group>"; };
+		DD2D4A1D1CD7A650006366B8 /* LuaRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaRef.h; sourceTree = "<group>"; };
+		DD2D4A1E1CD7A650006366B8 /* Namespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Namespace.h; sourceTree = "<group>"; };
+		DD2D4A1F1CD7A650006366B8 /* Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stack.h; sourceTree = "<group>"; };
+		DD2D4A201CD7A650006366B8 /* TypeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeList.h; sourceTree = "<group>"; };
+		DD2D4A211CD7A650006366B8 /* TypeTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeTraits.h; sourceTree = "<group>"; };
+		DD2D4A221CD7A650006366B8 /* Userdata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Userdata.h; sourceTree = "<group>"; };
+		DD2D4A231CD7A650006366B8 /* LuaBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaBridge.h; sourceTree = "<group>"; };
+		DD2D4A241CD7A650006366B8 /* RefCountedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefCountedObject.h; sourceTree = "<group>"; };
+		DD2D4A251CD7A650006366B8 /* RefCountedPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefCountedPtr.h; sourceTree = "<group>"; };
 		DD30B82A1C729F8100835197 /* listManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = listManager.h; sourceTree = "<group>"; };
 		DD35BB911CA4A8260088210D /* luaCalls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = luaCalls.h; sourceTree = "<group>"; };
 		DD35BBE11CA4B8C40088210D /* lauxlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lauxlib.h; path = "../../../Downloads/lua-5.1/src/lauxlib.h"; sourceTree = "<group>"; };
@@ -92,6 +111,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD2D4A131CD7A650006366B8 /* LuaBridge */ = {
+			isa = PBXGroup;
+			children = (
+				DD2D4A141CD7A650006366B8 /* detail */,
+				DD2D4A231CD7A650006366B8 /* LuaBridge.h */,
+				DD2D4A241CD7A650006366B8 /* RefCountedObject.h */,
+				DD2D4A251CD7A650006366B8 /* RefCountedPtr.h */,
+			);
+			name = LuaBridge;
+			path = "../../../Downloads/LuaBridge-master/Source/LuaBridge";
+			sourceTree = "<group>";
+		};
+		DD2D4A141CD7A650006366B8 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				DD2D4A151CD7A650006366B8 /* CFunctions.h */,
+				DD2D4A161CD7A650006366B8 /* ClassInfo.h */,
+				DD2D4A171CD7A650006366B8 /* Constructor.h */,
+				DD2D4A181CD7A650006366B8 /* dump.h */,
+				DD2D4A191CD7A650006366B8 /* FuncTraits.h */,
+				DD2D4A1A1CD7A650006366B8 /* Iterator.h */,
+				DD2D4A1B1CD7A650006366B8 /* LuaException.h */,
+				DD2D4A1C1CD7A650006366B8 /* LuaHelpers.h */,
+				DD2D4A1D1CD7A650006366B8 /* LuaRef.h */,
+				DD2D4A1E1CD7A650006366B8 /* Namespace.h */,
+				DD2D4A1F1CD7A650006366B8 /* Stack.h */,
+				DD2D4A201CD7A650006366B8 /* TypeList.h */,
+				DD2D4A211CD7A650006366B8 /* TypeTraits.h */,
+				DD2D4A221CD7A650006366B8 /* Userdata.h */,
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
 		DD3A055A1A9EBE70003AEB27 = {
 			isa = PBXGroup;
 			children = (
@@ -99,7 +151,10 @@
 				DD196BDF1CAC387B00EDB55D /* SDL2_ttf.framework */,
 				DD3A05651A9EBE70003AEB27 /* openworld */,
 				DD3A05641A9EBE70003AEB27 /* Products */,
+				DD2D4A131CD7A650006366B8 /* LuaBridge */,
 				DD35BBF21CA4C8250088210D /* Arial.ttf */,
+				DD2D4A111CD6B421006366B8 /* luawrapper.hpp */,
+				DD2D4A121CD6B421006366B8 /* luawrapperutil.hpp */,
 				DD7A7C021CAC6CE6007F06D6 /* SDL_ttf.h */,
 				DD35BBE11CA4B8C40088210D /* lauxlib.h */,
 				DD35BBE21CA4B8C40088210D /* liblua.a */,

@@ -6,6 +6,11 @@
 #include <fstream>
 #include "Particle.h"
 #include "Animation.h"
+extern "C" {
+#include "lua.h"
+#include "lualib.h"
+#include "lauxlib.h"
+}
 
 using namespace std;
 
@@ -47,6 +52,7 @@ class cNpc
     public:
     
     cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,int rp,const char*file,int nx);
+    cNpc(){};
     SDL_Rect *getBox(){ return &box;}
     float *getXvel() { return &xVel;};
     float getYvel() { return yVel;};
@@ -65,5 +71,5 @@ class cNpc
     void Interact(vector<cNpc*>n);
     void Move(int x,int y);
     void collide(SDL_Rect object);
-    void Render();
+    void Render(SDL_Rect camera);
 };
