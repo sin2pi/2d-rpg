@@ -14,6 +14,7 @@ cTile::cTile(int w,int h)
 void cTile::LoadSheet(const char *file)
 {
     SDL_Surface *sur =  SDL_LoadBMP(file);
+    SDL_SetColorKey(sur,SDL_TRUE,SDL_MapRGB(sur->format,0,255,255));
     txt = SDL_CreateTextureFromSurface(SDL_GetRenderer(SDL_GetWindowFromID(1)), sur);
     xs = sur->w/tw;
     ys = sur->h/th;
@@ -64,14 +65,12 @@ void cTile::LoadMap(const char *filename)
                     }
                 }
             }
-            
         }
     }
 }
 
-void cTile::RenderLayer(int ln)
+void cTile::RenderLayer(int ln,float amb,light l)
 {
-    float lif = 0.6;
     for(int i = 0; i < mapSizeX; i++)
 	{
 		for(int j = 0; j < mapSizeY; j++)
@@ -81,7 +80,23 @@ void cTile::RenderLayer(int ln)
 		    rect.y = j*th - camera.y;
             rect.w = tw;
             rect.h = th;
-            SDL_SetTextureColorMod(txt,255*lif,255*lif,255*lif);
+            
+            if(Physics::circlecol(&rect, 600-camera.x, 700-camera.y, 4000))
+            {
+                float a = l.resolvePointLight(600-camera.x, 700-camera.y,rect.x, rect.y);
+                float c1 = a*255;
+                float c2 = a*255;
+                float c3 = a*255;
+                if(c1 > 255)
+                    c1 = 255;
+                if(c2 > 255)
+                    c2 = 255;
+                if(c3 > 255)
+                    c3 = 255;
+                SDL_SetTextureColorMod(txt,c1,c2,c3);
+            }
+            else SDL_SetTextureColorMod(txt,255*amb,255*amb,255*amb);
+            
             SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindowFromID(1)),txt,&clip[layer[i][j][ln]],&rect);
 		}
 	}

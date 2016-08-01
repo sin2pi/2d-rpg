@@ -88,15 +88,34 @@ void cItem::Interact(vector<cItem*> items)
     else yvel = 0;
 }
 
-void cItem::Render()
+void cItem::Render(light w)
 {
+    float amb = w.getAmb();
     box.x = (int)pos.x;
     box.y = (int)pos.y;
     SDL_Rect box1 = {static_cast<Sint16>(box.x-camera.x),static_cast<Sint16>(box.y-camera.y),box.w,box.h};
+    if(Physics::circlecol(&box1, 600-camera.x, 700-camera.y, 4000))
+    {
+        float a = w.resolvePointLight(600-camera.x, 700-camera.y,box1.x,box1.y);
+        float c1 = a*255;
+        float c2 = a*255;
+        float c3 = a*255;
+        if(c1 > 255)
+            c1 = 255;
+        if(c2 > 255)
+            c2 = 255;
+        if(c3 > 255)
+            c3 = 255;
+        SDL_SetTextureColorMod(txt,c1,c2,c3);
+    }
+   // SDL_SetTextureColorMod(txt,255*amb,255*amb,255*amb);
+    
     if(grabed == false){
+        
         SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindowFromID(1)),txt,NULL,&box1);
     }
 }
+
 
 
 

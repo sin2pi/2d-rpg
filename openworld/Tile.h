@@ -2,6 +2,7 @@
 
 #include <SDL2/SDL.h>
 #include <iostream>
+#include "light.h"
 
 using namespace std;
 
@@ -25,6 +26,6 @@ class cTile
     void LoadSheet(const char*file);
     void LoadMap(const char* filename);
     void RenderMap(SDL_Surface *tiles[]);
-    void RenderLayer(int layer);
+    void RenderLayer(int layer,float amb,light l);
     
 };

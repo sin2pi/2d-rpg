@@ -13,7 +13,8 @@
 #include <vector>
 
 
-struct vec2d{
+class vec2d{
+public:
     float x,y,w,h;
 };
 
@@ -29,6 +30,7 @@ private:
     float speed;
     int ix,iy;
     vec2d posVec;
+    int fx = 0;
     
     
 public:
@@ -36,11 +38,13 @@ public:
     Particle(vec2d p,vec2d d,float s,int lf);
     Particle(){};
     
+    void Reset(vec2d,vec2d,int,int);
+    
     void Update();
     
     bool isDead();
     
-    void Render();
+    void Render(float amb);
     
 };
 

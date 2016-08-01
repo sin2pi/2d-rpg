@@ -346,29 +346,30 @@ void cNpc::Move(int x, int y)
      }
 }
 
-void cNpc::Render(SDL_Rect camera)
+void cNpc::Render(SDL_Rect camera,light w)
 {
+    float amb = w.getAmb();
     SDL_Rect rect = {static_cast<Sint16>(box.x - camera.x), static_cast<Sint16>(box.y - camera.y),box.w,box.h};
     if(Hp > 0){
         if(side[3])
         {
-            lanim->RunAnimation(rect,txt);
+            lanim->RunAnimation(rect,txt,w);
         }
         else if(side[1])
         {
-            ranim->RunAnimation(rect,txt);
+            ranim->RunAnimation(rect,txt,w);
         }
         else if(side[2])
         {
-            lanim->RunAnimation(rect,txt);
+            lanim->RunAnimation(rect,txt,w);
         }
         else if(side[0])
         {
-            ranim->RunAnimation(rect,txt);
+            ranim->RunAnimation(rect,txt,w);
         }
         else if(!side[0]&&!side[1]&&!side[2]&&!side[3])
         {
-            idle.at(idleframe)->RenderFrame(rect,txt);
+            idle.at(idleframe)->RunAnimation(rect,txt,w);
         }
         
     }

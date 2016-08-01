@@ -14,6 +14,7 @@
 #include "Physics.h"
 #include "Inventory.h"
 #include "Particle.h"
+#include "light.h"
 
 class Inventory;
 
@@ -41,7 +42,7 @@ public:
     string getScript(){return sf;}
     string getImgFile(){return filename;}
     cItem(int xpos,int ypos,int w,int h,float vel,string file,string script,int index);
-    void Render();
+    void Render(light w);
     void Interact(vector<cItem*>items);
     bool &isGrabed(){return grabed;}
     SDL_Rect getPos(){ return box;};

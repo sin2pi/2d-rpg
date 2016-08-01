@@ -16,7 +16,6 @@ Inventory::Inventory()
 void Inventory::AddItem(cItem *item)
 {
     inventory.push_back(item);
-    cout << inventory.size();
 }
 void Inventory::QuitItem(int id)
 {

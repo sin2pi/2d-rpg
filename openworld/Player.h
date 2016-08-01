@@ -7,6 +7,7 @@
 #include "Item.h"
 #include "Inventory.h"
 #include "Animation.h"
+#include "light.h"
 
 extern "C" {
 #include "lua.h"
@@ -57,8 +58,8 @@ class cPlayer
     SDL_Rect SetCamera(SDL_Rect cam);
     void Interact(vector<cNpc*>n);
     void Interact(vector<cItem*>n);
-    void Render(SDL_Rect camera);
+    void Render(SDL_Rect camera,light w);
     void Move();
-    void HandleInput(SDL_Event event,vector<cItem*>n,Inventory *inv);
+    void HandleInput(SDL_Event event,vector<cItem*>n,Inventory *inv,bool &running);
     void Grab(SDL_Rect object);
 };

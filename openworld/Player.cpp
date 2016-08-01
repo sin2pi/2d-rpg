@@ -119,11 +119,11 @@ void cPlayer::Interact(vector<cItem *> n)
 
 }
 
-void cPlayer::HandleInput(SDL_Event event,vector<cItem*>n,Inventory *inv)
+void cPlayer::HandleInput(SDL_Event event,vector<cItem*>n,Inventory *inv,bool &running)
 {
     switch(event.type){
         case SDL_QUIT:
-            //running = false;
+            running = false;
             break;
         case SDL_JOYAXISMOTION:  /* Handle Joystick Motion */
             //cout << event.jaxis.value << endl;
@@ -210,7 +210,7 @@ void cPlayer::HandleInput(SDL_Event event,vector<cItem*>n,Inventory *inv)
                 dir[3] = 1;
                 break;
              case SDLK_ESCAPE:
-                //running = false;
+                running = false;
                 break;
             case SDLK_g:
                 for(int i = 0;i < n.size();i++){
@@ -233,6 +233,7 @@ void cPlayer::HandleInput(SDL_Event event,vector<cItem*>n,Inventory *inv)
                 
             case SDLK_UP:
                 dir[0] = 0;
+                idleframe = 3;
                 break;
             case SDLK_LEFT:
                 dir[1] = 0;
@@ -240,10 +241,11 @@ void cPlayer::HandleInput(SDL_Event event,vector<cItem*>n,Inventory *inv)
                 break;
             case SDLK_DOWN:
                 dir[2] = 0;
+                idleframe = 0;
                 break;
             case SDLK_RIGHT:
                 dir[3] = 0;
-                idleframe = 0;
+                idleframe = 2;
                 break;
             case SDLK_m:
                 grabing = false;
@@ -352,34 +354,34 @@ SDL_Rect cPlayer::SetCamera(SDL_Rect cam)
 
 }
 
-void cPlayer::Render(SDL_Rect camera)
+void cPlayer::Render(SDL_Rect camera,light w)
 {
-    
+    float amb = w.getAmb();
     SDL_Rect rect = {static_cast<Sint16>(box.x - camera.x), static_cast<Sint16>(box.y - camera.y),box.w,box.h};
     
     if(dir[1])
     {
         idleframe = 1;
-        lanim->RunAnimation(rect,txt);
+        lanim->RunAnimation(rect,txt,w);
     }
     else if(dir[3])
     {
         idleframe = 2;
-        ranim->RunAnimation(rect,txt);
+        ranim->RunAnimation(rect,txt,w);
     }
     else if(dir[0])
     {
         idleframe = 3;
-        uanim->RunAnimation(rect,txt);
+        uanim->RunAnimation(rect,txt,w);
     }
     else if(dir[2])
     {
         idleframe = 0;
-        danim->RunAnimation(rect,txt);
+        danim->RunAnimation(rect,txt,w);
     }
     
     else{
-        idle.at(idleframe)->RunAnimation(rect,txt);
+        idle.at(idleframe)->RunAnimation(rect,txt,w);
     }
     
     //SDL_BlitSurface(image,NULL,SDL_GetVideoSurface(),&rect);

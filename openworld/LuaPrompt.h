@@ -16,8 +16,9 @@ class LuaPrompt
     
 private:
     int c = 1;
+    std::string strcpy;
     SDL_Texture *txt;
-    
+    bool run = false;
     TTF_Font *font2;
     SDL_Color green = {0,200,0};
     bool PromptActive;
@@ -26,7 +27,8 @@ private:
 public:
     LuaPrompt();
     ~LuaPrompt();
-
+ 
+    void runScrip(lua_State *L);
     void update(SDL_Surface*);
     void HandleInput(SDL_Event event,lua_State *L);
 };

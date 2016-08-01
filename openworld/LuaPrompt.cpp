@@ -35,6 +35,19 @@ void LuaPrompt::update(SDL_Surface* screen)
     }
 
 }
+
+void LuaPrompt::runScrip(lua_State *L)
+{
+        int ret = luaL_dostring(L,strcpy.c_str());
+        if(ret != 0)
+        {
+            const char *out = lua_tostring(L,-1);
+            std::cout << out << std::endl;
+            lua_pop(L,1);
+        }
+        str = "";
+}
+
 void LuaPrompt::HandleInput(SDL_Event event,lua_State *L)
 {
     if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_TAB){
@@ -78,14 +91,8 @@ void LuaPrompt::HandleInput(SDL_Event event,lua_State *L)
             
             if ( event.key.keysym.sym == SDLK_RETURN)
             {
-                int ret = luaL_dostring(L,str.c_str());
-                if(ret != 0)
-                {
-                    const char *out = lua_tostring(L,-1);
-                    std::cout << out << std::endl;
-                    lua_pop(L,1);
-                }
-                str = "";
+                strcpy = str;
+                runScrip(L);
             }
             if(event.key.keysym.sym == SDLK_LSHIFT){
                 str += "\n";
@@ -93,7 +100,7 @@ void LuaPrompt::HandleInput(SDL_Event event,lua_State *L)
             }
             
             
-            Prompt = TTF_RenderText_Blended_Wrapped(font2,str.c_str(),{0,0,0},600);
+            Prompt = TTF_RenderText_Blended_Wrapped(font2,str.c_str(),{0,0,0},800);
             txt = SDL_CreateTextureFromSurface(SDL_GetRenderer(SDL_GetWindowFromID(1)),Prompt);
             
             
@@ -104,7 +111,7 @@ void LuaPrompt::HandleInput(SDL_Event event,lua_State *L)
             if(SDL_GetModState() && KMOD_CAPS)
                 str += event.text.text;
             
-            Prompt = TTF_RenderText_Blended_Wrapped(font2,str.c_str(),{0,0,0},200);
+            Prompt = TTF_RenderText_Blended_Wrapped(font2,str.c_str(),{0,0,0},800);
             txt = SDL_CreateTextureFromSurface(SDL_GetRenderer(SDL_GetWindowFromID(1)),Prompt);
             
         }

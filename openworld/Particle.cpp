@@ -12,8 +12,8 @@
 Particle::Particle(vec2d p,vec2d d,float s,int lf){
     pos.x = p.x;
     pos.y = p.y;
-    pos.w = 7;
-    pos.h = 7;
+    pos.w = 3;
+    pos.h = 3;
     posVec.x = p.x;
     posVec.y = p.y;
     ix = p.x;
@@ -27,14 +27,17 @@ Particle::Particle(vec2d p,vec2d d,float s,int lf){
 
 
 void Particle::Update(){
+    
     if(!isDead()){
+        fx++;
         posVec.x += dir.x * speed;
-        posVec.y += dir.y * speed;
+        posVec.y += dir.y * speed+(fx*fx)/40;
         pos.x = (int)posVec.x;
         pos.y = (int)posVec.y;
     }
     
 }
+
 
 bool Particle::isDead(){
     if(SDL_GetTicks() > timer)
@@ -52,11 +55,11 @@ bool Particle::isDead(){
     return false;
 }
 
-void Particle::Render()
+void Particle::Render(float amb)
 {
     if(!isDead()){
         //SDL_FillRect(,&pos,SDL_MapRGB(SDL_GetRenderer()->format,0,0,200));
-        SDL_SetRenderDrawColor(SDL_GetRenderer(SDL_GetWindowFromID(1)), 0, 0, 255, 255 );
+        SDL_SetRenderDrawColor(SDL_GetRenderer(SDL_GetWindowFromID(1)), 0, 0*amb, 255*amb, 255*amb);
         
         // Render rect
         SDL_RenderFillRect(SDL_GetRenderer(SDL_GetWindowFromID(1)), &pos );

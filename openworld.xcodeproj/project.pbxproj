@@ -16,6 +16,7 @@
 		DD3A05901A9EC7B6003AEB27 /* npc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD3A05861A9EC7B6003AEB27 /* npc.cpp */; };
 		DD3A05921A9EC7B6003AEB27 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD3A058A1A9EC7B6003AEB27 /* Player.cpp */; };
 		DD3A05931A9EC7B6003AEB27 /* Tile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD3A058C1A9EC7B6003AEB27 /* Tile.cpp */; };
+		DD6F6E691D49909300C0133A /* light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD6F6E671D49909300C0133A /* light.cpp */; };
 		DD7EF1B31CAC3F7D00DD0766 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD7EF1B21CAC3F7D00DD0766 /* SDL2.framework */; };
 		DD8DAA991C0F7C9500E138BF /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD8DAA981C0F7C9500E138BF /* Item.cpp */; };
 		DD8DAA9C1C11F5E600E138BF /* Inventory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD8DAA9B1C11F5E600E138BF /* Inventory.cpp */; };
@@ -60,6 +61,7 @@
 		DD2D4A231CD7A650006366B8 /* LuaBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaBridge.h; sourceTree = "<group>"; };
 		DD2D4A241CD7A650006366B8 /* RefCountedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefCountedObject.h; sourceTree = "<group>"; };
 		DD2D4A251CD7A650006366B8 /* RefCountedPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefCountedPtr.h; sourceTree = "<group>"; };
+		DD2D4A261CD997A5006366B8 /* chrono.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chrono.png; sourceTree = "<group>"; };
 		DD30B82A1C729F8100835197 /* listManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = listManager.h; sourceTree = "<group>"; };
 		DD35BB911CA4A8260088210D /* luaCalls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = luaCalls.h; sourceTree = "<group>"; };
 		DD35BBE11CA4B8C40088210D /* lauxlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lauxlib.h; path = "../../../Downloads/lua-5.1/src/lauxlib.h"; sourceTree = "<group>"; };
@@ -85,6 +87,11 @@
 		DD3A059C1A9ECAFC003AEB27 /* tile1.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tile1.bmp; sourceTree = "<group>"; };
 		DD3A059D1A9ECAFC003AEB27 /* tile2.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tile2.bmp; sourceTree = "<group>"; };
 		DD3A059E1A9ECAFC003AEB27 /* tile3.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tile3.bmp; sourceTree = "<group>"; };
+		DD4F24A21CEAA65300850F83 /* test.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.lua; sourceTree = "<group>"; };
+		DD4F24A31CEAAD8000850F83 /* set.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = set.lua; sourceTree = "<group>"; };
+		DD6F6E671D49909300C0133A /* light.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = light.cpp; sourceTree = "<group>"; };
+		DD6F6E681D49909300C0133A /* light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = light.h; sourceTree = "<group>"; };
+		DD77EF231CDAB6E700617F1A /* ParticleEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleEngine.h; sourceTree = "<group>"; };
 		DD7A7C021CAC6CE6007F06D6 /* SDL_ttf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_ttf.h; path = ../../../../../Library/Frameworks/SDL2_ttf.framework/Versions/A/Headers/SDL_ttf.h; sourceTree = "<group>"; };
 		DD7EF1B21CAC3F7D00DD0766 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		DD8DAA961C0E453100E138BF /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
@@ -93,7 +100,6 @@
 		DD8DAA9A1C0FA6DE00E138BF /* Inventory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Inventory.h; sourceTree = "<group>"; };
 		DD8DAA9B1C11F5E600E138BF /* Inventory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Inventory.cpp; sourceTree = "<group>"; };
 		DDC2D6641C99A19400D0330B /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
-		DDC2D6651C99A19400D0330B /* ParticleEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleEngine.h; sourceTree = "<group>"; };
 		DDD65FA01C28B33400E09636 /* map.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = map.txt; path = ../openworld/map.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,6 +168,7 @@
 				DD35BBE41CA4B8C40088210D /* lualib.h */,
 				DD3A05961A9ECAFC003AEB27 /* background.bmp */,
 				DD3A05971A9ECAFC003AEB27 /* bullet.bmp */,
+				DD2D4A261CD997A5006366B8 /* chrono.png */,
 				DD3A05981A9ECAFC003AEB27 /* enemy1.bmp */,
 				DD3A05991A9ECAFC003AEB27 /* object1.bmp */,
 				DD3A059A1A9ECAFC003AEB27 /* object2.bmp */,
@@ -186,9 +193,13 @@
 			isa = PBXGroup;
 			children = (
 				DD23334B1CA61DE3001100CC /* main.cpp */,
+				DD4F24A21CEAA65300850F83 /* test.lua */,
+				DD4F24A31CEAAD8000850F83 /* set.lua */,
 				DD23A2001CBAC9A400ACD608 /* vec2d.h */,
 				DD35BB911CA4A8260088210D /* luaCalls.h */,
 				DD30B82A1C729F8100835197 /* listManager.h */,
+				DD6F6E671D49909300C0133A /* light.cpp */,
+				DD6F6E681D49909300C0133A /* light.h */,
 				DD8DAA961C0E453100E138BF /* Physics.h */,
 				DD8DAA9B1C11F5E600E138BF /* Inventory.cpp */,
 				DD8DAA9A1C0FA6DE00E138BF /* Inventory.h */,
@@ -206,7 +217,7 @@
 				DD3A058D1A9EC7B6003AEB27 /* Tile.h */,
 				DD196BD91CAC33B800EDB55D /* Particle.cpp */,
 				DDC2D6641C99A19400D0330B /* Particle.h */,
-				DDC2D6651C99A19400D0330B /* ParticleEngine.h */,
+				DD77EF231CDAB6E700617F1A /* ParticleEngine.h */,
 			);
 			path = openworld;
 			sourceTree = "<group>";
@@ -275,6 +286,7 @@
 				DD3A05921A9EC7B6003AEB27 /* Player.cpp in Sources */,
 				DD8DAA9C1C11F5E600E138BF /* Inventory.cpp in Sources */,
 				DD2415251C24FFE5009C2322 /* Animation.cpp in Sources */,
+				DD6F6E691D49909300C0133A /* light.cpp in Sources */,
 				DD3A05931A9EC7B6003AEB27 /* Tile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

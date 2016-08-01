@@ -6,11 +6,14 @@
 //  Copyright (c) 2015 martin dionisi. All rights reserved.
 //
 
+#include <vector>
+#include <SDL2/SDL.h>
+#include "light.h"
+#include "Physics.h"
 #ifndef __openworld__Animation__
 #define __openworld__Animation__
 
-#include <vector>
-#include <SDL2/SDL.h>
+
 
 using namespace std;
 
@@ -29,9 +32,9 @@ public:
     
     Animation(int x,int y,int w,int h,int nx,int speed);
     
-    void RunAnimation(SDL_Rect pos,SDL_Texture*txt);
+    void RunAnimation(SDL_Rect pos,SDL_Texture*txt,light w);
 
-    void RenderFrame(SDL_Rect pos,SDL_Texture *txt);
+    void RenderFrame(SDL_Rect pos,SDL_Texture *txt,light w);
     
 };
 

@@ -28,7 +28,7 @@ class cNpc
     float Power,Hp;
     bool friends;
     int rep;
-    int rad = 150;
+    int rad = 10;
     bool rmoving;
     bool ontrack;
     bool onradar;
@@ -52,7 +52,6 @@ class cNpc
     public:
     
     cNpc(float x,float y,int w,int h,int xvel,int yvel,float power,float hp,int rp,const char*file,int nx);
-    cNpc(){};
     SDL_Rect *getBox(){ return &box;}
     float *getXvel() { return &xVel;};
     float getYvel() { return yVel;};
@@ -71,5 +70,5 @@ class cNpc
     void Interact(vector<cNpc*>n);
     void Move(int x,int y);
     void collide(SDL_Rect object);
-    void Render(SDL_Rect camera);
+    void Render(SDL_Rect camera,light w);
 };
